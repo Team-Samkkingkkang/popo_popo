@@ -4,13 +4,13 @@ from django.db import models
 
 class User(AbstractUser):
     user_nickname = models.CharField(max_length=200)
-    user_profile = models.ImageField()
+    user_profile = models.ImageField(null=True)
     user_regi_date = models.DateTimeField(auto_now_add=True)
-    user_number = models.IntegerField()
-    user_auth_type = models.BooleanField()
+    user_number = models.IntegerField(null=True)
+    user_auth_type = models.BooleanField(null=True)
     user_address_number = models.CharField(max_length=200)
     user_address = models.CharField(max_length=200)
-    user_delivery_number = models.IntegerField()
+    user_delivery_number = models.IntegerField(null=True)
 
 
 class Order(models.Model):

@@ -25,7 +25,14 @@ def diary_create(request):
 
 
 def diary_show(request):
-    return render(request, 'diary_page/diary_show.html', context={})
+    diary = Diary.objects.all()
+    return render(request, 'diary_page/diary_show.html', context={'diary': diary})
+
+
+def diary_detail(request):
+    diary = Diary.objects.all()
+    context = {'diary': diary}
+    return render(request, 'diary_page/diary_detail.html', context)
 
 
 def diary_update(request):

@@ -1,7 +1,39 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 
 {% block content %}
+    <h1>로그인</h1>
+    <a href="/accounts/signup">회원가입</a>
+    <br>
 
-    account 페이지 입니다.
+    <form method="POST">
+    {% csrf_token %}
+    <p>{{ error }}</p>
+    아이디:
+    <br>
+    <input name="username" type="text" value="" required>
+    <br>
+    비밀번호:
+    <br>
+    <input name="password" type="password" value="" required>
+    <br>
+    <br>
+    <input class="btn btn-dark" type="submit" value="로그인">
+    </form>
+
+    {% if user.is_authenticated %}
+    <a href="/accounts/logout">로그아웃</a>
+    <br>
+    {{ user.username }} 님이 로그인 중
+    {% else %}
+    <form action="{% provider_login_url 'kakao' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">카카오 로그인</button>
+    </form>
+    <form action="{% provider_login_url 'naver' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">네이버 로그인</button>
+    </form>
+    {% endif %}
 
 {% endblock %}
