@@ -63,11 +63,11 @@ class OrderCount(models.Model):
 
 
 class Diary(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     diary_content = models.TextField()
     diary_date = models.DateTimeField(auto_now_add=True)
-    diary_img = models.FileField()
-    diary_share_state = models.BooleanField()
+    diary_img = models.ImageField(upload_to='diary_img/', null=True, blank=True)
+    diary_share_state = models.BooleanField(default=False)
 
 
 class Board(models.Model):
