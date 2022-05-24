@@ -4,10 +4,10 @@
 
     <h1>My Diary</h1>
     {% for diary in diary %}
-    <a href="{% url 'main:diary_detail' diary.id %}">
-        <img src="{{ diary.diary_img.url }}">
-    </a>
-    <p>{{ diary.diary_date.month }}월 {{ diary.diary_date.day }}일</p>
+        <a href="{% url 'main:diary_detail' diary.id %}">
+            <img src="{{ diary.diary_img.url }}">
+        </a>
+        <p>{{ diary.diary_date.month }}월 {{ diary.diary_date.day }}일</p>
     {% endfor %}
 
 {% endblock %}
