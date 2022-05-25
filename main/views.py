@@ -13,7 +13,7 @@ def diary(request):
 def diary_create(request):
     if request.method == 'POST':
         if request.POST.get('diary_img') or request.POST.get('diary_content'):
-            diary_img = request.POST.get('diary_img')
+            diary_img = request.FILES['diary_img']
             diary_content = request.POST.get('diary_content')
 
             diary_model = Diary()
@@ -26,11 +26,12 @@ def diary_create(request):
 
 def diary_show(request):
     diary = Diary.objects.all()
+    print(diary)
     return render(request, 'diary_page/diary_show.html', context={'diary': diary})
 
 
-def diary_detail(request):
-    diary = Diary.objects.all()
+def diary_detail(request, diary_id):
+    diary = Diary.objects.get(id=diary_id)
     context = {'diary': diary}
     return render(request, 'diary_page/diary_detail.html', context)
 

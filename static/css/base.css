@@ -1,0 +1,54 @@
+:root {
+    --header-text-color: #7A6E6E;
+    --header-backgroud-color: #F8F3F3;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.header_list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--header-backgroud-color);
+}
+
+.logo > a > img {
+    width: auto;
+    height: auto;
+    max-width: 80px;
+    max-height: 80px;
+    padding-top: 5px;
+}
+
+.diary_button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+    padding: 10px 100px;
+}
+
+.diary_button > h3 > a {
+    color: var(--header-text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header_list_list {
+    display: flex;
+}
+
+.header_list_list > a {
+    color: var(--header-text-color);
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0px 10px;
+}
+
+.header_list_list > a:hover {
+    text-decoration: underline;
+}
