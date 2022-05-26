@@ -3,9 +3,6 @@
 {% block content %}
 
     <h1 class="diary_logo">My Diary</h1>
-    <div class="diary_button">
-        <h3><a href="{% url 'main:diary_create' %}">다이어리 쓰기</a></h3>
-    </div>
     <div class="diary_list">
         {% for diary in diary %}
         <article class="diary_ctn">
@@ -15,5 +12,7 @@
         </article>
         {% endfor %}
     </div>
-
+    <div class="diary_button">
+        <h3><a href="{% url 'main:diary_create' %}">다이어리 쓰기</a></h3>
+    </div>
 {% endblock %}

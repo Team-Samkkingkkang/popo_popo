@@ -8,25 +8,42 @@ body{
     padding: 0;
 }
 
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--header-backgroud-color);
+}
+
+.login {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 330px;
+}
+
+.login > a {
+    color: var(--header-text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .header_list {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    background-color: var(--header-backgroud-color);
 }
 
 .logo > a > img {
     width: auto;
     height: auto;
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 300px;
+    max-height: 300px;
     padding-top: 5px;
 }
 
 .diary_button {
-    display: flex;
-    justify-content: flex-end;
+    text-align: right;
     margin: 10px;
     padding: 10px 100px;
 }
