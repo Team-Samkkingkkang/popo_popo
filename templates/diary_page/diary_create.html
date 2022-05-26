@@ -5,11 +5,11 @@
     다이어리 쓰기 페이지 입니다.
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="diary_img" alt="diary_img">
+        <input type="file" name="diary_img" alt="diary_img" accept=".jpg,.jpeg,.png">
         <label>
             <input type="text" name="diary_content">
         </label>
         <input type="submit">
     </form>
-
+    {{ message }}
 {% endblock %}

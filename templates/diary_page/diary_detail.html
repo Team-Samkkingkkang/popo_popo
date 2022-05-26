@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p><img src="{{ diary.diary_img.url }}"></p>
-<p>{{diary.diary_date}}</p>
-<p>{{diary.diary_content}}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <script>
+        function chk_form(form_name) {
+            document.getElementById(form_name).submit();
+        }
+    </script>
+
+    <p><img src="{{ diary.diary_img.url }}"></p>
+    <p>{{diary.diary_date}}</p>
+    <p>{{diary.diary_content}}</p>
+
+    <a href="{% url 'main:diary_update' diary.id %}">수정하기</a>
+    <a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>
+    <a href="#">공유하기</a>
+{% endblock %}
