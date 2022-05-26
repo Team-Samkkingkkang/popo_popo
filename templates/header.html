@@ -1,6 +1,19 @@
 <header>
     <div class="login">
-        <a href="{% url 'main:account' %}">로그인</a>
+        <li>
+            {% if user.is_authenticated %}
+                {{ user.username }}님
+                <li>
+                    <a href="/accounts/logout">로그아웃</a>
+                </li>
+                <li>|</li>
+            {% else %}
+                로그인이 필요합니다!
+                <li><a href="/accounts/login">로그인</a></li>
+                <li>|</li>
+            {% endif %}
+        </li>
+        <li><a href="/accounts/signup">회원가입</a></li>
     </div>
     <div class="header_list">
         <div class="logo">
@@ -11,7 +24,7 @@
             <a href="{% url 'main:diary_show' %}">다이어리</a>
             <a href="{% url 'main:shop' %}">POPO_SHOP</a>
             <a href="{% url 'main:chatbot' %}">챗봇</a>
-            <a href="{% url 'main:board' %}">게시판</a>
+            <a href="{% url 'main:board' %}">고해성사</a>
         </div>
     </div>
 </header>

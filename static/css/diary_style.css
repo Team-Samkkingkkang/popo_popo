@@ -27,11 +27,32 @@ body {
     height: 225px;
     object-fit: cover;
     padding: 10px;
-    opacity: 0.4;
+    opacity: 0.6;
     filter: alpha(opacity=50);
 }
 
 .diary_image:hover {
     opacity: 1.0;
     filter: alpha(opacity=100);
+}
+
+.diary_button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+    padding: 10px 15px;
+    border: 2px solid var(--header-text-color);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.diary_button:hover {
+    background-color: var(--header-backgroud-color);
+}
+
+.diary_button > a {
+    color: var(--header-text-color);
+    text-decoration: none;
+    font-weight: bold;
 }

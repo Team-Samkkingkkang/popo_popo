@@ -1,11 +1,14 @@
 :root {
     --header-text-color: #7A6E6E;
     --header-backgroud-color: #F8F3F3;
+    --background-color: #f9f9f9;
+    --button-color: #C9C9C9;
 }
 
 body{
     margin: 0;
     padding: 0;
+    background-color: var(--background-color);
 }
 
 header {
@@ -21,9 +24,16 @@ header {
     justify-content: flex-end;
     padding-top: 10px;
     padding-right: 330px;
+    font-size: 13px;
 }
 
-.login > a {
+.login > li {
+    color: var(--header-text-color);
+    list-style: none;
+    padding: 0px 5px;
+}
+
+.login > li > a {
     color: var(--header-text-color);
     text-decoration: none;
     font-weight: bold;
@@ -44,26 +54,6 @@ header {
     padding-top: 5px;
 }
 
-.diary_button {
-    position: relative;
-    margin: 10px;
-    padding: 10px 100px;
-}
-
-.diary_button > h3 {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-.diary_button > h3 > a {
-    color: var(--header-text-color);
-    text-decoration: none;
-    font-weight: bold;
-}
-
 .header_list_list {
     display: flex;
 }
@@ -78,4 +68,16 @@ header {
 
 .header_list_list > a:hover {
     text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+}
+
+footer > img {
+    padding-bottom: 10px;
+    width: auto;
+    height: auto;
+    max-width: 50px;
+    max-height: 50px;
 }
