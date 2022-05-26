@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
+from datetime import datetime
+import datetime
 
 
 class User(AbstractUser):
@@ -68,6 +71,7 @@ class Diary(models.Model):
     diary_date = models.DateTimeField(auto_now_add=True)
     diary_img = models.ImageField(upload_to='diary_img/', null=True, blank=True)
     diary_share_state = models.BooleanField(default=False)
+    diary_share_date = models.DateTimeField(auto_now_add=True)
 
 
 class Board(models.Model):
