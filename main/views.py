@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
@@ -12,33 +13,64 @@ def diary(request):
 
 def diary_create(request):
     if request.method == 'POST':
-        if request.POST.get('diary_img') or request.POST.get('diary_content'):
-            diary_img = request.FILES['diary_img']
-            diary_content = request.POST.get('diary_content')
 
-            diary_model = Diary()
+        diary_model = Diary()
+        if request.FILES:
+            diary_img = request.FILES['diary_img']
             diary_model.diary_img = diary_img
+
+        if request.POST.get('diary_content'):
+            diary_content = request.POST.get('diary_content')
             diary_model.diary_content = diary_content
             diary_model.save()
-        return render(request, 'diary_page/diary.html', context={})
+
+        else:
+            context = {'message': '일기 내용이 없습니다.'}
+            return render(request, 'diary_page/diary_create.html', context)
+
+        return render(request, 'diary_page/diary_show.html', context={})
     return render(request, 'diary_page/diary_create.html', context={})
 
 
 def diary_show(request):
-    diary = Diary.objects.all()
-    print(diary)
-    return render(request, 'diary_page/diary_show.html', context={'diary': diary})
+    diarys = Diary.objects.all()
+    return render(request, 'diary_page/diary_show.html', context={'diarys': diarys})
 
 
 def diary_detail(request, diary_id):
+    context={}
     diary = Diary.objects.get(id=diary_id)
-    context = {'diary': diary}
+    context['diary'] = diary
+    diarys = Diary.objects.all()
+    context['diarys'] = diarys
+
     return render(request, 'diary_page/diary_detail.html', context)
 
+def diary_delete(request, diary_id):
+    print(diary_id)
+    Diary.objects.filter(id=diary_id).delete()
+    return HttpResponseRedirect(reverse('main:diary_show'))
 
-def diary_update(request):
-    return render(request, 'diary_page/diary_update.html', context={})
 
+def diary_update(request, diary_id):
+    context = {}
+    diary = Diary.objects.get(id=diary_id)
+    context['diary'] = diary
+
+    if request.method == 'POST':
+        if request.FILES:
+            diary_img = request.FILES['diary_img']
+            Diary.objects.filter(pk=diary_id).update(diary_img=diary_img)
+
+        if request.POST.get('diary_content'):
+            diary_content = request.POST.get('diary_content')
+            Diary.objects.filter(pk=diary_id).update(diary_content=diary_content)
+            return render(request, 'diary_page/diary_detail.html', context)
+        else:
+            context['message'] = '일기 내용이 없습니다.'
+            return render(request, 'diary_page/diary_update.html', context)
+
+    return render(request, 'diary_page/diary_update.html', context)
 
 #### ---- 포포샵 ---- ####
 def shop(request):

@@ -15,6 +15,8 @@ urlpatterns = [
     path('diary_create/', views.diary_create, name="diary_create"),
     path('diary_show/', views.diary_show, name="diary_show"),
     path('diary_detail/<int:diary_id>/', views.diary_detail, name="diary_detail"),
+    path('diary_delete/<int:diary_id>/', views.diary_delete, name="diary_delete"),
+    path('diary_update/<int:diary_id>/', views.diary_update, name="diary_update"),
 
     # 포포샵
     path('shop/', views.shop, name="shop"),

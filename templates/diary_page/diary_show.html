@@ -3,10 +3,12 @@
 {% block content %}
     <h1 class="diary_logo">My Diary</h1>
     <div class="diary_list">
-        {% for diary in diary %}
+        {% for diary in diarys %}
         <article class="diary_ctn">
             <a href="{% url 'main:diary_detail' diary.id %}">
-                <img src="{{ diary.diary_img.url }}" class="diary_image">
+                {% if diary.diary_img %}
+                    <img src="{{ diary.diary_img.url }}" class="diary_image">
+                {% endif %}
             </a>
         </article>
         {% endfor %}
