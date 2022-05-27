@@ -2,6 +2,9 @@
 
 {% block content %}
 
-    board 페이지 입니다.
+    {% for diary in diarys %}
+        {{ diary.diary_content }}
+        ㅋㅋ
+    {% endfor %}
 
 {% endblock %}

@@ -98,4 +98,5 @@ def account(request):
 
 
 def board(request):
-    return render(request, 'board_page/board.html', context={})
+    diarys = Diary.objects.filter(diary_share_state=True)
+    return render(request, 'board_page/board.html', context={'diarys': diarys})
