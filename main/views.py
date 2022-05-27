@@ -28,7 +28,7 @@ def diary_create(request):
             context = {'message': '일기 내용이 없습니다.'}
             return render(request, 'diary_page/diary_create.html', context)
 
-        return render(request, 'diary_page/diary_show.html', context={})
+        return HttpResponseRedirect(reverse('main:diary_show'))
     return render(request, 'diary_page/diary_create.html', context={})
 
 
@@ -38,13 +38,21 @@ def diary_show(request):
 
 
 def diary_detail(request, diary_id):
-    context={}
+    context = {}
     diary = Diary.objects.get(id=diary_id)
     context['diary'] = diary
     diarys = Diary.objects.all()
     context['diarys'] = diarys
 
+    if request.method == "POST":
+        if request.POST['share_status'] == 'True':
+            Diary.objects.filter(pk=diary_id).update(diary_share_state=True)
+
+        if request.POST['share_status'] == 'False':
+            Diary.objects.filter(pk=diary_id).update(diary_share_state=False)
+
     return render(request, 'diary_page/diary_detail.html', context)
+
 
 def diary_delete(request, diary_id):
     print(diary_id)
@@ -71,6 +79,7 @@ def diary_update(request, diary_id):
             return render(request, 'diary_page/diary_update.html', context)
 
     return render(request, 'diary_page/diary_update.html', context)
+
 
 #### ---- 포포샵 ---- ####
 def shop(request):
