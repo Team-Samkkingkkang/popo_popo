@@ -1,6 +1,7 @@
 <header>
     <div class="login">
-        <li>
+        <ul>
+            <li>
             {% if user.is_authenticated %}
                 {{ user.username }}님
                 <li>
@@ -12,8 +13,9 @@
                 <li><a href="/accounts/login">로그인</a></li>
                 <li>|</li>
             {% endif %}
-        </li>
-        <li><a href="/accounts/signup">회원가입</a></li>
+            </li>
+            <li><a href="/accounts/signup">회원가입</a></li>
+        </ul>
     </div>
     <div class="header_list">
         <div class="logo">

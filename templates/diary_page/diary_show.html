@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="diary_logo">My Diary</h1>
-    <div class="diary_list">
+    {% if user.is_authenticated %}
+        <h1 class="diary_logo">{{ user.username }}'s Diary</h1>
+        <div class="diary_list">
         {% for diary in diarys %}
         <article class="diary_ctn">
             <a href="{% url 'main:diary_detail' diary.id %}">
@@ -12,8 +13,11 @@
             </a>
         </article>
         {% endfor %}
-    </div>
-    <div class="diary_button">
-        <a href="{% url 'main:diary_create' %}">다이어리 쓰기</a>
-    </div>
+        </div>
+        <div class="diary_button">
+            <a href="{% url 'main:diary_create' %}">다이어리 쓰기</a>
+        </div>
+    {% else %}
+        <h1 class="diary_logo">로그인이 필요한 페이지 입니다.</h1>
+    {% endif %}
 {% endblock %}

@@ -46,6 +46,7 @@ def diary_detail(request, diary_id):
 
     return render(request, 'diary_page/diary_detail.html', context)
 
+
 def diary_delete(request, diary_id):
     print(diary_id)
     Diary.objects.filter(id=diary_id).delete()
@@ -72,6 +73,7 @@ def diary_update(request, diary_id):
 
     return render(request, 'diary_page/diary_update.html', context)
 
+
 #### ---- 포포샵 ---- ####
 def shop(request):
     return render(request, 'shop_page/shop.html', context={})
@@ -88,4 +90,5 @@ def account(request):
 
 
 def board(request):
-    return render(request, 'board_page/board.html', context={})
+    diarys = Diary.objects.filter(diary_share_state=True)
+    return render(request, 'board_page/board.html', context={'diarys': diarys})

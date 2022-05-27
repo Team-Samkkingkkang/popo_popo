@@ -27,13 +27,14 @@ header {
     font-size: 13px;
 }
 
-.login > li {
+.login > ul > li {
+    float: left;
     color: var(--header-text-color);
     list-style: none;
     padding: 0px 5px;
 }
 
-.login > li > a {
+.login > ul > li > a {
     color: var(--header-text-color);
     text-decoration: none;
     font-weight: bold;

@@ -2,6 +2,13 @@
 
 {% block content %}
 
-    board 페이지 입니다.
-
+    <div class="board_title">
+        <h1>고해성사 페이지</h1>
+    </div>
+    <div>
+    {% for diary in diarys %}
+        {{ diary.diary_content }}
+        ㅋㅋ
+    {% endfor %}
+    </div>
 {% endblock %}
