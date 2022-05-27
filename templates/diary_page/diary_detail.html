@@ -14,15 +14,25 @@
 
     <a href="{% url 'main:diary_update' diary.id %}">수정하기</a>
     <a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>
-    <form method="post" id="share_True">
+
+    <!-- 공유 안되어있으면 공유하기 기능 -->
+    {% if diary.diary_share_state == False %}
+        <form method="post" id="share_True">
         {% csrf_token %}
         <input type="hidden" name="share_status" value="True">
-    </form>
-    <a href="#" onclick="return chk_form('share_True')">공유하기</a>
-    <form method="post" id="share_False">
+        </form>
+        <a href="#" onclick="return chk_form('share_True')">공유하기</a>
+    {% endif %}
+
+    <!-- 공유 안되어있으면 공유하기 기능 -->
+    {% if diary.diary_share_state == True %}
+        <form method="post" id="share_False">
         {% csrf_token %}
         <input type="hidden" name="share_status" value="False">
-    </form>
-    <a href="#" onclick="return chk_form('share_False')">공유중지</a>
-    {{ diary.diary_share_state }}
+        </form>
+        <a href="#" onclick="return chk_form('share_False')">공유중지</a>
+    {% endif %}
+
+    {{ diary.diary_share_date }}
+
 {% endblock %}

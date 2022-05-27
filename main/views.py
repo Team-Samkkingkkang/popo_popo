@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
@@ -46,10 +47,10 @@ def diary_detail(request, diary_id):
 
     if request.method == "POST":
         if request.POST['share_status'] == 'True':
-            Diary.objects.filter(pk=diary_id).update(diary_share_state=True)
+            Diary.objects.filter(pk=diary_id).update(diary_share_state=True, diary_share_date=timezone.localtime())
 
         if request.POST['share_status'] == 'False':
-            Diary.objects.filter(pk=diary_id).update(diary_share_state=False)
+            Diary.objects.filter(pk=diary_id).update(diary_share_state=False, diary_share_date=timezone.localtime())
 
     return render(request, 'diary_page/diary_detail.html', context)
 
