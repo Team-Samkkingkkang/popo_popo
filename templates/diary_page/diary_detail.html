@@ -8,31 +8,45 @@
         }
     </script>
 
-    <p><img src="{{ diary.diary_img.url }}"></p>
-    <p>{{diary.diary_date}}</p>
-    <p>{{diary.diary_content}}</p>
+    <!-- 박스 시작 -->
+    <div>
+        <div class="content">
+            <div class="content_img">
+                <img src="{{ diary.diary_img.url }}">
+            </div>
+            <div class="content_content">
+                <div class="content_content_detail">
+                    {{diary.diary_content}}
+                </div>
+                <div class="content_dates_buttons">
+                    <p>{{diary.diary_date}}</p>
+                    <button><a href="{% url 'main:diary_update' diary.id %}">수정하기</a></button>
+                    <button><a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>   </button>
 
-    <a href="{% url 'main:diary_update' diary.id %}">수정하기</a>
-    <a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>
+                    <!-- 공유 안되어있으면 공유하기 기능 -->
+                    {% if diary.diary_share_state == False %}
+                        <form method="post" id="share_True">
+                        {% csrf_token %}
+                        <input type="hidden" name="share_status" value="True">
+                        </form>
+                        <button><a href="#" onclick="return chk_form('share_True')">공유하기</a></button>
+                    {% endif %}
 
-    <!-- 공유 안되어있으면 공유하기 기능 -->
-    {% if diary.diary_share_state == False %}
-        <form method="post" id="share_True">
-        {% csrf_token %}
-        <input type="hidden" name="share_status" value="True">
-        </form>
-        <a href="#" onclick="return chk_form('share_True')">공유하기</a>
-    {% endif %}
+                    <!-- 공유 안되어있으면 공유하기 기능 -->
+                    {% if diary.diary_share_state == True %}
+                        <form method="post" id="share_False">
+                        {% csrf_token %}
+                        <input type="hidden" name="share_status" value="False">
+                        </form>
+                        <button><a href="#" onclick="return chk_form('share_False')">공유중지</a></button>
+                    {% endif %}
 
-    <!-- 공유 안되어있으면 공유하기 기능 -->
-    {% if diary.diary_share_state == True %}
-        <form method="post" id="share_False">
-        {% csrf_token %}
-        <input type="hidden" name="share_status" value="False">
-        </form>
-        <a href="#" onclick="return chk_form('share_False')">공유중지</a>
-    {% endif %}
 
-    {{ diary.diary_share_date }}
+                </div>
+            {% comment %}</div>{% endcomment %}
+            {% comment %}<div class="de_r">{% endcomment %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

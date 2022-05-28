@@ -1,0 +1,43 @@
+.content_create {
+    width: 70rem;
+    height: 20rem;
+}
+
+.create_box {
+    display: flex;
+    margin: 1rem 12rem;
+}
+
+.create_box > input {
+    outline: none;
+}
+
+.create_box_btn {
+    width: 70rem;
+    height: 20rem;
+    margin: 1rem 12rem;
+    text-align: right;
+}
+
+.pic > img {
+    border-radius: 2rem;
+}
+
+hr {
+    background-color: #6F4918;
+    border: 0;
+    width: 70rem;
+    height: 2px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
