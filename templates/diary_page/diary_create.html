@@ -2,14 +2,23 @@
 
 {% block content %}
 
-    다이어리 쓰기 페이지 입니다.
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="diary_img" alt="diary_img" accept=".jpg,.jpeg,.png">
-        <label>
-            <input type="text" name="diary_content">
-        </label>
-        <input type="submit">
+        <div style="margin-left: 12rem; margin-top: 2rem;" class="pic">
+            {% load static %}
+            <img src="{% static 'image/paper.png' %}" id="img_section" style="width: 200px; height: 200px;">
+            <br>
+            <input type="file" name="diary_img" alt="diary_img" accept=".jpg,.jpeg,.png">
+        </div>
+        <hr>
+        <div class="create_box">
+            <input class="content_create" type="text" name="diary_content" placeholder="내용을 입력하세요" style="border: 0 solid black;" >
+        </div>
+        <hr>
+
+        <div class="create_box_btn">
+            <input class="submit_bt" type="submit">
+        </div>
     </form>
     {{ message }}
 {% endblock %}
