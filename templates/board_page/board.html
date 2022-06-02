@@ -4,7 +4,9 @@
 
     {% for diary in diarys %}
         {{ diary.diary_content }}
-        ㅋㅋ
+        {{ diary.diary_date }}
+        <img src="{{ diary.diary_img.url }}">
     {% endfor %}
 
 {% endblock %}
+
