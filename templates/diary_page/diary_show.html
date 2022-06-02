@@ -1,19 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <style>
+        .modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 200;
+        }
+
+        .modal.show {
+            display: block;
+            z-index: 200;
+        }
+
+        .modal_body {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 200;
+            width: 400px;
+            height: 600px;
+            padding: 40px;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+            transform: translateX(-50%) translateY(-50%);
+        }
+    </style>
+
+    <div class="modal">
+        <div class="modal_body">
+            <div class="modal_content"></div>
+            <div class="modal_date"></div>
+            <div class="modal_img"></div>
+        </div>
+
+    </div>
+
     <h1 class="diary_logo">My Diary</h1>
     <div class="diary_list">
         {% for diary in diarys %}
-        <article class="diary_ctn">
-            <a href="{% url 'main:diary_detail' diary.id %}">
-                {% if diary.diary_img %}
-                    <img src="{{ diary.diary_img.url }}" class="diary_image">
-                {% endif %}
-            </a>
-        </article>
+            <article class="diary_ctn">
+                <a class="happy">
+                    {% if diary.diary_img %}
+                        <img src="{{ diary.diary_img.url }}" class="diary_image"
+                             onclick="show([`{{ diary.diary_content }}`, `{{ diary.diary_date }}`, `{{ diary.diary_img.url }}`])">
+                    {% endif %}
+                </a>
+            </article>
         {% endfor %}
     </div>
     <div class="diary_button">
         <h3><a href="{% url 'main:diary_create' %}">다이어리 쓰기</a></h3>
     </div>
+
+    <script type="text/javascript">
+
+        function show(a) {
+            console.log(a);
+            $(".modal_content").html(a[0]);
+            $(".modal_date").html(a[1]);
+
+            $(".modal_img").html('<img src="'+a[2]+'" class="diary_imag">');
+        }
+
+        const body = document.querySelector('body');
+        const modal = document.querySelector('.modal');
+        const btnOpenPopup = document.querySelectorAll('.diary_image');
+
+        for (var btn in btnOpenPopup) {
+            btnOpenPopup[btn].addEventListener('click', () => {
+                modal.classList.toggle('show');
+
+                if (modal.classList.contains('show')) {
+                    body.style.overflow = 'hidden';
+                }
+            });
+
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.toggle('show');
+
+                    if (!modal.classList.contains('show')) {
+                        body.style.overflow = 'auto';
+                    }
+                }
+            });
+        }
+
+    </script>
 {% endblock %}
