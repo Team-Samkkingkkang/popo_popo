@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- 박스 시작 -->
+    <div>
+        <div class="content">
+            <div class="content_img">
+                <img src="{{ diary.diary_img.url }}">
+            </div>
+            <div class="content_content">
+                <div class="content_content_detail">
+                    {{diary.diary_content}}
+                </div>
+                <div class="content_dates_buttons">
+                    <p>{{diary.diary_date}}</p>
+                    <button><a href="{% url 'main:diary_update' diary.id %}">수정하기</a></button>
+                    <button><a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>   </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
