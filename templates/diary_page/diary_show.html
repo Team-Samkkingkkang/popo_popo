@@ -9,18 +9,23 @@
                 <div class="modal_img"></div>
                 <div class="modal_right">
                     <div class="emobox">
-                    {% load static %}
-                    <img src="{% static 'image/happy.png' %}" class="emo">
+                        {% load static %}
+                        <img src="{% static 'image/happy.png' %}" class="emo">
                     </div>
                     <div class="modal_right_r">
                         <div class="modal_content"></div>
                         <div class="modal_date"></div>
+                        <button class="modal_update"></button>
+                        <button class="modal_delete"></button>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="modal_id"></div>
+                            <div class="modal_share"></div>
+                        </form>
+                        <div class="ssss"></div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -31,7 +36,14 @@
                 <a class="happy">
                     {% if diary.diary_img %}
                         <img src="{{ diary.diary_img.url }}" class="diary_image"
-                             onclick="show([`{{ diary.diary_content }}`, `{{ diary.diary_date }}`, `{{ diary.diary_img.url }}`])">
+                             onclick="show([
+                                     `{{ diary.diary_content }}`,
+                                     `{{ diary.diary_date }}`,
+                                     `{{ diary.diary_img.url }}`,
+                                     `{% url 'main:diary_update' diary.id %}`,
+                                     `{% url 'main:diary_delete' diary.id %}`,
+                                     `{{ diary.id }}`,
+                                     `{{ diary.diary_share_state }}`])">
                     {% endif %}
                 </a>
             </article>
@@ -41,39 +53,6 @@
         <h3><a href="{% url 'main:diary_create' %}">다이어리 쓰기</a></h3>
     </div>
 
-    <script type="text/javascript">
+    <script src="{% static 'js/diary_show.js' %}"></script>
 
-        function show(a) {
-            console.log(a);
-            $(".modal_content").html(a[0]);
-            $(".modal_date").html(a[1]);
-
-            $(".modal_img").html('<img src="'+a[2]+'" class="diary_img">');
-        }
-
-        const body = document.querySelector('body');
-        const modal = document.querySelector('.modal');
-        const btnOpenPopup = document.querySelectorAll('.diary_image');
-
-        for (var btn in btnOpenPopup) {
-            btnOpenPopup[btn].addEventListener('click', () => {
-                modal.classList.toggle('show');
-
-                if (modal.classList.contains('show')) {
-                    body.style.overflow = 'hidden';
-                }
-            });
-
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.classList.toggle('show');
-
-                    if (!modal.classList.contains('show')) {
-                        body.style.overflow = 'auto';
-                    }
-                }
-            });
-        }
-
-    </script>
 {% endblock %}
