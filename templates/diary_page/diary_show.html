@@ -9,18 +9,23 @@
                 <div class="modal_img"></div>
                 <div class="modal_right">
                     <div class="emobox">
-                    {% load static %}
-                    <img src="{% static 'image/happy.png' %}" class="emo">
+                        {% load static %}
+                        <img src="{% static 'image/happy.png' %}" class="emo">
                     </div>
                     <div class="modal_right_r">
                         <div class="modal_content"></div>
                         <div class="modal_date"></div>
+                        <button class="modal_update"></button>
+                        <button class="modal_delete"></button>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="modal_id"></div>
+                            <div class="modal_share"></div>
+                        </form>
+                        <div class="ssss"></div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -31,7 +36,14 @@
                 <a class="happy">
                     {% if diary.diary_img %}
                         <img src="{{ diary.diary_img.url }}" class="diary_image"
-                             onclick="show([`{{ diary.diary_content }}`, `{{ diary.diary_date }}`, `{{ diary.diary_img.url }}`])">
+                             onclick="show([
+                                     `{{ diary.diary_content }}`,
+                                     `{{ diary.diary_date }}`,
+                                     `{{ diary.diary_img.url }}`,
+                                     `{% url 'main:diary_update' diary.id %}`,
+                                     `{% url 'main:diary_delete' diary.id %}`,
+                                     `{{ diary.id }}`,
+                                     `{{ diary.diary_share_state }}`])">
                     {% endif %}
                 </a>
             </article>
@@ -42,13 +54,26 @@
     </div>
 
     <script type="text/javascript">
+        function chk_form(form_name) {
+            document.getElementById(form_name).submit();
+        }
 
         function show(a) {
             console.log(a);
             $(".modal_content").html(a[0]);
             $(".modal_date").html(a[1]);
+            $(".modal_img").html('<img src="' + a[2] + '" class="diary_img">');
+            $(".modal_update").html('<a href="' + a[3] + '">수정하기</a>');
+            $(".modal_delete").html('<a href="' + a[4] + '">삭제하기</a>');
+            $(".modal_id").html('<input type="hidden" name="share_id" value="' + a[5] + '">');
 
-            $(".modal_img").html('<img src="'+a[2]+'" class="diary_img">');
+            if (a[6] === "False") {
+                console.log('다시')
+                $(".modal_share").html(`<button class="send_btn" onclick="share_status('True')" type="button">공유 하기</button>`);
+            } else if (a[6] === "True") {
+                console.log('다시')
+                $(".modal_share").html(`<button class="send_btn" onclick="share_status('False')" type="button">공유 중지</button>`);
+            }
         }
 
         const body = document.querySelector('body');
@@ -75,5 +100,29 @@
             });
         }
 
+        function share_status(status) {
+            let share_status = status;
+            let share_id = document.querySelector('input[name="share_id"]').value;
+            console.log(status, share_id);
+
+            $.ajax({
+                url: 'share_status',
+                type: 'GET',
+                data: {
+                    'share_status': share_status,
+                    'share_id': share_id
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data['share'])
+                    if (data['share'] === 'True') {
+                        $(".modal_share").html(`<button class="send_btn" onclick="share_status('False')" type="button">공유 중지</button>`);
+                    }
+                    else if (data['share'] === 'False') {
+                        $(".modal_share").html(`<button class="send_btn" onclick="share_status('True')" type="button">공유 하기</button>`);
+                    }
+                }
+            })
+        }
     </script>
 {% endblock %}

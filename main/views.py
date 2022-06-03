@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
 # Create your views here.
@@ -38,21 +38,24 @@ def diary_show(request):
     return render(request, 'diary_page/diary_show.html', context={'diarys': diarys})
 
 
-def diary_detail(request, diary_id):
-    context = {}
-    diary = Diary.objects.get(id=diary_id)
-    context['diary'] = diary
-    diarys = Diary.objects.all()
-    context['diarys'] = diarys
+def diary_detail(request):
+    return render(request, 'diary_page/diary_detail.html')
 
-    if request.method == "POST":
-        if request.POST['share_status'] == 'True':
-            Diary.objects.filter(pk=diary_id).update(diary_share_state=True, diary_share_date=timezone.localtime())
 
-        if request.POST['share_status'] == 'False':
-            Diary.objects.filter(pk=diary_id).update(diary_share_state=False, diary_share_date=timezone.localtime())
+def share_status(request):
+    if request.GET['share_status'] == 'True':
+        Diary.objects.filter(pk=request.GET['share_id']).update(diary_share_state=True,
+                                                                diary_share_date=timezone.localtime())
+        context = {'share': 'True'}
 
-    return render(request, 'diary_page/diary_detail.html', context)
+    elif request.GET['share_status'] == 'False':
+        Diary.objects.filter(pk=request.GET['share_id']).update(diary_share_state=False,
+                                                                diary_share_date=timezone.localtime())
+        context = {'share': 'False'}
+    else:
+        print('no!')
+        context = {'share': 'no'}
+    return JsonResponse(context)
 
 
 def diary_delete(request, diary_id):
