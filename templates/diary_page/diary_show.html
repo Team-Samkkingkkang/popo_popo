@@ -2,46 +2,26 @@
 
 {% block content %}
 
-    <style>
-        .modal {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 200;
-        }
-
-        .modal.show {
-            display: block;
-            z-index: 200;
-        }
-
-        .modal_body {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 200;
-            width: 400px;
-            height: 600px;
-            padding: 40px;
-            text-align: center;
-            background-color: rgb(255, 255, 255);
-            border-radius: 10px;
-            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-            transform: translateX(-50%) translateY(-50%);
-        }
-    </style>
-
     <div class="modal">
-        <div class="modal_body">
-            <div class="modal_content"></div>
-            <div class="modal_date"></div>
-            <div class="modal_img"></div>
-        </div>
 
+        <div class="modal_body">
+            <div class="modal_main">
+                <div class="modal_img"></div>
+                <div class="modal_right">
+                    <div class="emobox">
+                    {% load static %}
+                    <img src="{% static 'image/happy.png' %}" class="emo">
+                    </div>
+                    <div class="modal_right_r">
+                        <div class="modal_content"></div>
+                        <div class="modal_date"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
     <h1 class="diary_logo">My Diary</h1>
@@ -68,7 +48,7 @@
             $(".modal_content").html(a[0]);
             $(".modal_date").html(a[1]);
 
-            $(".modal_img").html('<img src="'+a[2]+'" class="diary_imag">');
+            $(".modal_img").html('<img src="'+a[2]+'" class="diary_img">');
         }
 
         const body = document.querySelector('body');
