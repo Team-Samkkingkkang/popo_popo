@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    {% for diary in diarys %}
-        {{ diary.diary_content }}
-        {{ diary.diary_date }}
-        <img src="{{ diary.diary_img.url }}">
-    {% endfor %}
+    {% load static %}
+    <div clss="board_main">
+        {% for diary in diarys %}
+            <div class="board_box">
+                <div class="board_body">
+                    <div class="board_content">
+                        <div class="board_content_head">
+                            <img src="{% static 'image/popo_main.png' %}">
+                            <span class="board_user_name">익명1</span>
+                            <span class="board_date">{{ diary.diary_date }}</span>
+                        </div>
+                        <div class="board_content_body">{{ diary.diary_content }}</div>
+                        <div class="board_content_status">좋아요/댓글 표시
+                        </div>
+                    </div>
+                    <div class="board_image">
+                        <img src="{{ diary.diary_img.url }}">
+                    </div>
+                </div>
+                <div class="board_comment"></div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
