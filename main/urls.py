@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-
+from django.contrib.auth import views as auth_views
 from main import views
 
 app_name = 'main'
@@ -27,6 +27,8 @@ urlpatterns = [
 
     # 계정
     path('account/', views.account, name="account"),
+    path('account/signup/', views.signup, name="signup"),
+    path('account/logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     # 게시판
     path('board/', views.board, name="board"),
