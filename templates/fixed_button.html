@@ -1,0 +1,11 @@
+{% load static %}
+<div class="buttons">
+
+    <button onclick="location.href='{% url 'main:diary_create' %}'" class="write_button">
+        다이어리 쓰기
+    </button>
+    <button onclick="location.href='{% url 'main:chatbot' %}'" class="chat_button">
+        <img src="{% static 'image/popo_main.png' %}">
+    </button>
+
+</div>
