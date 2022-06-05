@@ -30,25 +30,26 @@
 }
 
 .diary_img {
-
-    width: 25rem;
-    height: 38rem;
+    width: auto;
+    height: auto;
+    max-height: 25rem;
+    max-width: 25rem;
 
 }
 
 .modal_main {
-    display: flex;
+
 }
- .modal_right {
-     width: 25rem;
-     margin-left: 1rem;
- }
+
+.modal_right {
+    width: 25rem;
+    margin-left: 1rem;
+}
 
 .modal_content {
     text-align: left;
     width: 25rem;
     height: 28rem;
-
     padding: 1rem;
     font-size: 1.2rem;
 }
@@ -56,8 +57,14 @@
 .modal_date {
     text-align: right;
     width: 25rem;
+}
 
-
+.modal_img {
+    width: auto;
+    height: auto;
+    max-height: 25rem;
+    max-width: 25rem;
+    background-color: #757575;
 }
 
 .emo {
