@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary
+from main.models import Diary, User
 
 
 def diary(request):
@@ -98,6 +98,29 @@ def chatbot(request):
 #### ---- 계정 ---- ####
 def account(request):
     return render(request, 'account_page/account.html', context={})
+
+
+def signup(request):
+
+    # 회원가입 완료 안한 유저
+    if User.objects.get(pk=request.user.pk).user_signup_completed == False:
+        if request.method == "POST":
+            if request.POST['user_signup_completed'] == 'True':
+                User.objects.filter(pk=request.user.pk).update(user_nickname=request.POST['user_nickname'],
+                                                               user_signup_completed=True)
+            if request.FILES['user_profile']:
+                user_profile = request.FILES['user_profile']
+                User.objects.filter(pk=request.user.pk).update(user_profile=user_profile)
+
+            if request.POST['user_email']:
+                User.objects.filter(pk=request.user.pk).update(email=request.POST['user_email'])
+            return diary_show(request)
+
+    # 회원가입 완료한 유저
+    elif User.objects.get(pk=request.user.pk).user_signup_completed == True:
+        return diary_show(request)
+
+    return render(request, 'account_page/signup.html', context={})
 
 
 def board(request):

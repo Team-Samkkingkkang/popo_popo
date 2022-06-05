@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="email" name="user_email" placeholder="이메일 입력">
+            <input type="text" name="user_nickname" placeholder="별칭" maxlength="10" minlength="2" required>
+            <input type="file" name="user_profile" placeholder="프로필 이미지" accept=".jpg,.jpeg,.png">
+            <input type="hidden" name="user_signup_completed" value="True">
+            <input type="submit">
+        </form>
+    {% elif not user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="email" name="user_email" placeholder="이메일 입력" required>
+            <input type="email" name="user_password" placeholder="비밀번호 입력" required>
+            <input type="email" name="user_password_check" placeholder="비밀번호 확인" required>
+            <input type="text" name="user_nickname" placeholder="별칭" maxlength="10" minlength="2" required>
+            <input type="file" name="user_profile" placeholder="프로필 이미지" accept=".jpg,.jpeg,.png">
+            <input type="hidden" name="user_signup_completed" value="True">
+            <input type="submit">
+        </form>
+    {% endif %}
+
+
+{% endblock %}
