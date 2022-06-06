@@ -4,13 +4,19 @@
     {% include 'head.html' %}
 </head>
 <body>
+{% load static %}
 
+<!-- 헤더 -->
 {% include 'header.html' %}
+<!-- 내용 -->
 {% block content %}
-
 {% endblock %}
 
+<!-- 푸터 -->
 {% include 'footer.html' %}
+
+<!-- 고정버튼 -->
+{% include 'fixed_button.html' %}
 
 </body>
 </html>

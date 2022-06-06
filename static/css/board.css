@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+}
+
+.board_main {
+    width: 80rem;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 10px 20px;
+    padding: 15px 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.board_box {
+    width: 20rem;
+    background-color: #6F4918;
+}
+
+.board_image > img {
+    width: 6rem;
+    height: 6rem;
+}

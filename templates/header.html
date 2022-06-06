@@ -1,17 +1,18 @@
 <header>
+    {% load static %}
     <div class="login">
         <a href="{% url 'main:account' %}">로그인</a>
     </div>
     <div class="header_list">
         <div class="logo">
-            {% load static %}
             <a href="{% url 'main:main' %}"><img src="{% static 'image/logo4.png' %}"></a>
         </div>
         <div class="header_list_list">
-            <a href="{% url 'main:diary_show' %}">다이어리</a>
-            <a href="{% url 'main:shop' %}">POPO_SHOP</a>
             <a href="{% url 'main:chatbot' %}">챗봇</a>
+            <a href="{% url 'main:diary_show' %}">다이어리</a>
             <a href="{% url 'main:board' %}">게시판</a>
+            <a href="{% url 'main:shop' %}">POPO_SHOP</a>
+            <a href="{% url 'main:qna' %}">Qna</a>
         </div>
     </div>
 </header>

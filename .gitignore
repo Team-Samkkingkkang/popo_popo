@@ -85,6 +85,7 @@ main/__pycache__
 
 config/__pycache__/
 main/__pycache__/
+main/migrations/__pycache__/
 
 .idea
 .idea/

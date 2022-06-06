@@ -6,14 +6,12 @@ import datetime
 
 
 class User(AbstractUser):
-    user_nickname = models.CharField(max_length=200)
-    user_profile = models.ImageField(null=True)#
-    user_regi_date = models.DateTimeField(auto_now_add=True)#
-    user_number = models.IntegerField(null=True)#
-    user_auth_type = models.BooleanField(null=True)#
-    user_address_number = models.CharField(max_length=200)#
-    user_address = models.CharField(max_length=200)#
-    user_delivery_number = models.IntegerField(null=True)#
+    user_nickname = models.CharField(max_length=200) # 따로 설정 필요
+    user_profile = models.ImageField(default='default_img/diary_default_img.png') # 따로 설정 필요
+    user_regi_date = models.DateTimeField(auto_now_add=True)
+    user_auth_type = models.BooleanField(default=False)
+    user_signup_completed = models.BooleanField(default=False)
+    # + email 필드 사용
 
 
 class Order(models.Model):
@@ -40,7 +38,7 @@ class Qna(models.Model):
     qna_title = models.CharField(max_length=200)
     qna_content = models.TextField()
     qna_date = models.DateTimeField(auto_now=True)
-    qna_img = models.ImageField()
+    qna_img = models.ImageField(null=True, blank=True)
     qna_status = models.BooleanField()
 
 
