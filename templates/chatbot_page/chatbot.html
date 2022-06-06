@@ -1,68 +1,56 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="ko">
+<head>
+    {% include 'head.html' %}
+</head>
+<body>
 
-{% block content %}
-    <div class="chat_title">
+{% include 'header.html' %}
+
+{% load static %}
+
+<div class="chat">
+    <div class="chatheader">
         POPO CHAT
     </div>
-    <div class="chat">
-        <div>
-        {% load static %}
-        <img src="{% static 'image/cp.png' %}">
-        </div>
-        <div class="name"> <p>POPO</p> </div>
-        <div class="time"> <p>12:36</p> </div>
+    <div class="chatbox">
+        <div class="chatQ"></div>
+        <div class="chatA"></div>
     </div>
-    <div class="chat_content">
-        오늘 어땠어 ?
-    </div>
-    <div class="mychat">
-        <div class="time"> <p>12:36</p> </div>
-        <div class="name"> <p>ME</p> </div>
-    </div>
-    <div class="mychat_content">
-        오늘 너무 슬펐어,,
-    </div>
-        <div class="chat">
-        <div>
-        {% load static %}
-        <img src="{% static 'image/cp.png' %}">
-        </div>
-        <div class="name"> <p>POPO</p> </div>
-        <div class="time"> <p>12:36</p> </div>
-    </div>
-    <div class="chat_content">
-        왜 슬펐어 ?
-    </div>
-    <div class="mychat">
-        <div class="time"> <p>12:36</p> </div>
-        <div class="name"> <p>ME</p> </div>
-    </div>
-    <div class="mychat_content">
-        오늘 가장 친한 친구가 이사를 가게 됐어
-        오래 알고 지낸 친구라 그런지 마음이 더 공허해 너무 슬퍼...
-    </div>
-
-    <div class="typing">
+    <div class="chatfooter">
         <div class="go1">
-        {% load static %}
-        <img src="{% static 'image/go1.png' %}">
+            {% load static %}
+            <img src="{% static 'image/go1.png' %}">
         </div>
-        <form id="chat_submit">
-                {% csrf_token %}
-                <input class="typet" type="text" placeholder="type here">
-        </form>
-
+        <input id="chattext" class="typet" placeholder="Type text">
         <div class="go2">
-        {% load static %}
-        <a href="#" onclick="return chk_form('chat_submit')"><img src="{% static 'image/go2.png' %}"></a>
+            <button id="sendbtn" onclick="sendAsk()"><img src="{% static 'image/go2.png' %}"></button>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
 
+    let addtext = "";
+    let bottext = "";
 
-    </script>
+    function sendAsk() {
+        ctext = document.getElementById("chattext").value;
+        console.log(ctext)
+        if (ctext == "") {
+            document.getElementById("chattext").focus();
+            return false;
+        }
+        <h5>시우 사랑 나라 사랑</h5>
 
+        addtext += "<div style='margin: 3rem 5rem; text-align: right;'>" +
+            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 1.5rem;'>" + ctext + "</span></div>"
+        addtext += "<div style='margin: 3rem 5rem; text-align: left;'>" +
+            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 1.5rem;'>" + "나는 포포다" + "</span></div>"
+        $(".chatQ").html(addtext);
+    }
 
+</script>
 
-{% endblock %}
+</body>
+</html>

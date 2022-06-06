@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="chat_title">
+        POPO CHAT
+    </div>
+    <div class="chat">
+        <div>
+        {% load static %}
+        <img src="{% static 'image/cp.png' %}">
+        </div>
+        <div class="name"> <p>POPO</p> </div>
+        <div class="time"> <p>12:36</p> </div>
+    </div>
+    <div class="chat_content">
+        오늘 어땠어 ?
+    </div>
+    <div class="mychat">
+        <div class="time"> <p>12:36</p> </div>
+        <div class="name"> <p>ME</p> </div>
+    </div>
+    <div class="mychat_content">
+        오늘 너무 슬펐어,,
+    </div>
+        <div class="chat">
+        <div>
+        {% load static %}
+        <img src="{% static 'image/cp.png' %}">
+        </div>
+        <div class="name"> <p>POPO</p> </div>
+        <div class="time"> <p>12:36</p> </div>
+    </div>
+    <div class="chat_content">
+        왜 슬펐어 ?
+    </div>
+    <div class="mychat">
+        <div class="time"> <p>12:36</p> </div>
+        <div class="name"> <p>ME</p> </div>
+    </div>
+    <div class="mychat_content">
+        오늘 가장 친한 친구가 이사를 가게 됐어
+        오래 알고 지낸 친구라 그런지 마음이 더 공허해 너무 슬퍼...
+    </div>
+
+    <div class="typing">
+        <div class="go1">
+        {% load static %}
+        <img src="{% static 'image/go1.png' %}">
+        </div>
+        <form id="chat_submit">
+                {% csrf_token %}
+                <input class="typet" type="text" placeholder="type here">
+        </form>
+
+        <div class="go2">
+        {% load static %}
+        <a href="#" onclick="return chk_form('chat_submit')"></a>
+        </div>
+    </div>
+
+    <script>
+
+
+    </script>
+
+
+
+{% endblock %}
