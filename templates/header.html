@@ -1,17 +1,33 @@
 <header>
-    {% load static %}
     <div class="login">
-        <a href="{% url 'main:account' %}">로그인</a>
+        <ul>
+            <li>
+                {% if user.is_authenticated %}
+                    {{ user.username }}님
+                    <li>
+                        <a href="{% url 'main:logout' %}">로그아웃</a>
+                    </li>
+                    <li>|</li>
+                    <li>
+                        <a href="{% url 'main:mypage' user.pk %}">마이페이지</a>
+                    </li>
+                {% else %}
+                    <li> 로그인이 필요합니다!</li>
+                    <li><a href="{% url 'main:account' %}">로그인</a></li>
+                {% endif %}
+            </li>
+        </ul>
     </div>
     <div class="header_list">
         <div class="logo">
+            {% load static %}
             <a href="{% url 'main:main' %}"><img src="{% static 'image/logo4.png' %}"></a>
         </div>
         <div class="header_list_list">
-            <a href="{% url 'main:chatbot' %}">챗봇</a>
             <a href="{% url 'main:diary_show' %}">다이어리</a>
-            <a href="{% url 'main:board' %}">게시판</a>
             <a href="{% url 'main:shop' %}">POPO_SHOP</a>
+            <a href="{% url 'main:chatbot' %}">챗봇</a>
+            <a href="{% url 'main:board' %}">고해성사</a>
         </div>
     </div>
 </header>

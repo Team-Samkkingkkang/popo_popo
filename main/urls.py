@@ -32,5 +32,6 @@ urlpatterns = [
 
     # 게시판
     path('board/', views.board, name="board"),
+    path('mypage/<int:user_id>', views.mypage, name="mypage"),
 
 ]

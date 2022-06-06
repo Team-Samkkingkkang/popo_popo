@@ -101,9 +101,8 @@ def account(request):
 
 
 def signup(request):
-
     # 회원가입 완료 안한 유저
-    if User.objects.get(pk=request.user.pk).user_signup_completed == False:
+    if User.objects.get(pk=request.user.pk).user_signup_completed == True:
         if request.method == "POST":
             if request.POST['user_signup_completed'] == 'True':
                 User.objects.filter(pk=request.user.pk).update(user_nickname=request.POST['user_nickname'],
@@ -126,3 +125,18 @@ def signup(request):
 def board(request):
     diarys = Diary.objects.filter(diary_share_state=True)
     return render(request, 'board_page/board.html', context={'diarys': diarys})
+
+
+def mypage(request, user_id):
+    context = {}
+    user = User.objects.get(pk=user_id)
+    context['user'] = user
+
+    if request.method == 'POST':
+        if request.FILES:
+            user_profile = request.FILES['user_profile']
+            User.objects.get(pk=user_id).update(user_profile=user_profile)
+        else:
+            return 0;
+
+    return render(request, 'account_page/mypage.html', context)
