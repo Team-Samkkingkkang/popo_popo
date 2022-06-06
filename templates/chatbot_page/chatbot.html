@@ -22,7 +22,7 @@
             {% load static %}
             <img src="{% static 'image/go1.png' %}">
         </div>
-        <input id="chattext" class="typet" placeholder="Type text">
+        <input id="chattext" class="typet" placeholder="Type text" onclick=this.value="Type_text">
         <div class="go2">
             <button id="sendbtn" onclick="sendAsk()"><img src="{% static 'image/go2.png' %}"></button>
         </div>
@@ -41,7 +41,7 @@
             document.getElementById("chattext").focus();
             return false;
         }
-        <h5>시우 사랑 나라 사랑</h5>
+
 
         addtext += "<div style='margin: 3rem 5rem; text-align: right;'>" +
             "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 1.5rem;'>" + ctext + "</span></div>"
