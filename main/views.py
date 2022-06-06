@@ -146,7 +146,7 @@ def qna_create(request):
             qna_temp.qna_status = False
 
         qna_temp.user = User.objects.get(pk=request.user.id)
-        qna_temp.qna_title = request.POST['qn_title']
+        qna_temp.qna_title = request.POST['qna_title']
         qna_temp.qna_content = request.POST['qna_content']
         qna_temp.save()
         return HttpResponseRedirect(reverse('main:qna'))
