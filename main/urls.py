@@ -33,4 +33,11 @@ urlpatterns = [
     # 게시판
     path('board/', views.board, name="board"),
 
+    # QnA
+    path('QnA/', views.qna, name="qna"),
+    path('QnA_create/', views.qna_create, name="qna_create"),
+    path('QnA_detail/<int:qna_id>', views.qna_detail, name="qna_detail"),
+    path('QnA_update/<int:qna_id>', views.qna_update, name="qna_update"),
+    path('QnA_delete/<int:qna_id>', views.qna_delete, name="qna_delete"),
+
 ]
