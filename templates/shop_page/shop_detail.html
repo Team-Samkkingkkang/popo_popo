@@ -13,7 +13,26 @@
                 </div>
                 <div class="product_detail_body_content">
                     <div class="product_detail_body_content_name">
-                        {{  productoption.product.product_name  }}
+                        {{ productoption.product.product_name }}
+                    </div>
+                    <div class="product_detail_body_content_price">
+                        {% load humanize %}
+                        {{ productoption.option_price | intcomma }}원
+                    </div>
+                    <hr>
+                    <div class="product_detail_body_content_count">
+                        <div class="product_detail_body_content_count_content">
+                            <p>구매수량</p>
+                        </div>
+                        <div class="product_detail_body_content_count_btn">
+                            <button>
+
+                            </button>
+                            <input>
+                            <button>
+
+                            </button>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
