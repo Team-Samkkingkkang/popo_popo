@@ -1,10 +1,13 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from main import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 app_name = 'main'
+
 
 urlpatterns = [
     # 메인 화면
@@ -21,6 +24,7 @@ urlpatterns = [
 
     # 포포샵
     path('shop/', views.shop, name="shop"),
+    path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
 
     # 챗봇
     path('chatbot/', views.chatbot, name="chatbot"),
@@ -32,6 +36,14 @@ urlpatterns = [
 
     # 게시판
     path('board/', views.board, name="board"),
+    path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
+    path('<int:diary_id>/likes/', views.likes, name='likes'),
+    path('mypage/<int:user_id>/', views.mypage, name="mypage"),
+    path('uploadProfile/', views.uploadProfile, name="uploadProfile"),
+
+    # 댓글
+    # path('comment/<int:diary_id>', views.comment, name='comment'),
+    path('new_comment/<int:diary_id>/', views.new_comment, name="new_comment"),
 
     # QnA
     path('QnA/', views.qna, name="qna"),
@@ -39,5 +51,5 @@ urlpatterns = [
     path('QnA_detail/<int:qna_id>', views.qna_detail, name="qna_detail"),
     path('QnA_update/<int:qna_id>', views.qna_update, name="qna_update"),
     path('QnA_delete/<int:qna_id>', views.qna_delete, name="qna_delete"),
-
 ]
+
