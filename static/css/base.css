@@ -43,6 +43,8 @@ header {
     height: auto;
     max-width: 10rem;
     max-height: 10rem;
+    margin-right: 30rem;
+
 }
 
 .diary_button {

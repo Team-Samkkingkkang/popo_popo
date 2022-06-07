@@ -8,7 +8,7 @@ app_name = 'main'
 
 urlpatterns = [
     # 메인 화면
-    path('', TemplateView.as_view(template_name='base.html'), name='main'),
+    path('', TemplateView.as_view(template_name='main_page/main.html'), name='main'),
 
     # 다이어리
     path('diary/', views.diary, name="diary"),

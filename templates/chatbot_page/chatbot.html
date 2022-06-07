@@ -10,9 +10,6 @@
 {% load static %}
 
 <div class="chat">
-    <div class="chatheader">
-        POPO CHAT
-    </div>
     <div class="chatbox">
         <div class="chatQ"></div>
         <div class="chatA"></div>
@@ -22,7 +19,7 @@
             {% load static %}
             <img src="{% static 'image/go1.png' %}">
         </div>
-        <input id="chattext" class="typet" placeholder="Type text" onclick=this.value="Type_text">
+        <input id="chattext" class="typet" placeholder="Type text" onclick=this.value="">
         <div class="go2">
             <button id="sendbtn" onclick="sendAsk()"><img src="{% static 'image/go2.png' %}"></button>
         </div>
