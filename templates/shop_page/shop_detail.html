@@ -25,13 +25,15 @@
                             <p>구매수량</p>
                         </div>
                         <div class="product_detail_body_content_count_btn">
-                            <button>
-
-                            </button>
-                            <input>
-                            <button>
-
-                            </button>
+                            <form name="form" method="get">
+                                수량 :
+                                <input type=hidden name="sell_price" value="{{ productoption.option_price }}">
+                                <input type="text" name="amount" value="1" size="3" onchange="change();">
+                                <input type="button" value=" + " onclick="add();">
+                                <input type="button" value=" - " onclick="del();">
+                                <br>
+                                금액 : <input type="text" name="sum" size="11" readonly>원
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -39,5 +41,36 @@
         </div>
     </div>
 
+    <body onload="init();">
+    <script>
+
+        let sell_price = document.form.sell_price.value;
+        let amount = document.form.amount.value;
+        change();
+
+        function add() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            hm.value++;
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+        function del() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            if (hm.value > 1) {
+                hm.value--;
+                sum.value = parseInt(hm.value) * sell_price;
+            }
+        }
+        function change() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+
+            if (hm.value < 0) {
+                hm.value = 0;
+            }
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+    </script>
 
 {% endblock %}
