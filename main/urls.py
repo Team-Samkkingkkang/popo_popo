@@ -43,5 +43,12 @@ urlpatterns = [
     # 댓글
     # path('comment/<int:diary_id>', views.comment, name='comment'),
     path('new_comment/<int:diary_id>/', views.new_comment, name="new_comment")
+
+    # QnA
+    path('QnA/', views.qna, name="qna"),
+    path('QnA_create/', views.qna_create, name="qna_create"),
+    path('QnA_detail/<int:qna_id>', views.qna_detail, name="qna_detail"),
+    path('QnA_update/<int:qna_id>', views.qna_update, name="qna_update"),
+    path('QnA_delete/<int:qna_id>', views.qna_delete, name="qna_delete"),
 ]
 

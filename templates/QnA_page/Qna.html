@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for qna in qna_list %}
+        <div>
+            <a href="{% url 'main:qna_detail' qna.id %}">{{ qna.qna_title }}</a>
+            {{ qna.qna_date }}
+            {{ qna.user.user_nickname }}
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'main:qna_create' %}">질문하기</a>
+{% endblock %}

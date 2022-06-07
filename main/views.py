@@ -6,8 +6,7 @@ from . import models
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary, User, UserImage
-
+from main.models import Diary, User, UserImage, Qna
 from main.forms import CommentForm
 
 
@@ -179,8 +178,55 @@ def uploadProfile(request):
         return redirect('main:mypage', request.user.id)
     return diary_show(request)
 
+#### ---- QnA ---- ####
+def qna(request):
+    qna_list = Qna.objects.all()
+    return render(request, template_name='QnA_page/Qna.html', context={'qna_list': qna_list})
 
-'''
-user_id = User.objects.get(pk=request.user.id)
-user_profile = request.FILES['user_profile']
-UserImage.objects.filter(user=user_id).update(user_profile=user_profile)'''
+
+def qna_create(request):
+    if request.method == "POST":
+        qna_temp = Qna()
+        if request.FILES['qna_img']:
+            qna_temp.qna_img = request.FILES['qna_img']
+
+        if request.POST['qna_status'] == 'True':
+            qna_temp.qna_status = True
+
+        elif request.POST['qna_status'] == 'False':
+            qna_temp.qna_status = False
+
+        qna_temp.user = User.objects.get(pk=request.user.id)
+        qna_temp.qna_title = request.POST['qna_title']
+        qna_temp.qna_content = request.POST['qna_content']
+        qna_temp.save()
+        return HttpResponseRedirect(reverse('main:qna'))
+
+    return render(request, 'QnA_page/QnA_create.html')
+
+
+def qna_detail(request, qna_id):
+    qna_detail_object = Qna.objects.get(pk=qna_id)
+    return render(request, 'QnA_page/QnA_detail.html', context={'qna_detail_object': qna_detail_object})
+
+
+def qna_delete(request, qna_id):
+    Qna.objects.filter(pk=qna_id).delete()
+    return HttpResponseRedirect(reverse('main:qna'))
+
+
+def qna_update(request, qna_id):
+    if request.method == "POST":
+        if request.FILES['qna_img']:
+            Qna.objects.filter(pk=qna_id).update(qna_img=request.FILES['qna_img'])
+
+        if request.POST['qna_status'] == 'True':
+            Qna.objects.filter(pk=qna_id).update(qna_status=True)
+
+        elif request.POST['qna_status'] == 'False':
+            Qna.objects.filter(pk=qna_id).update(qna_status=False)
+
+        Qna.objects.filter(pk=qna_id).update(qna_title=request.POST['qna_title'], qna_content=request.POST['qna_content'])
+        return qna_detail(request, qna_id)
+    qna_detail_object = Qna.objects.get(pk=qna_id)
+    return render(request, 'QnA_page/QnA_update.html', context={'qna_detail_object': qna_detail_object})

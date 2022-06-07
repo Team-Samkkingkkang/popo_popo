@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    {{ qna_detail_object.qna_title }}
+    {{ qna_detail_object.qna_date }}
+    {{ qna_detail_object.user.user_nickname }}
+    {{ qna_detail_object.qna_content }}
+    <img src="{{ qna_detail_object.qna_img.url }}">
+    <a href="{% url 'main:qna_delete' qna_detail_object.id %}">삭제하기</a>
+    <a href="{% url 'main:qna_update' qna_detail_object.id %}">수정하기</a>
+{% endblock %}
