@@ -5,16 +5,17 @@
     <div class="profile">
         <div class="profile_header">
             <div class="profile_header_img">
-                <img src="{{ user.user_profile.url }}">
-                <form method="post" enctype="multipart/form-data">
+                <img src="{{ user.user_image.user_profile.url }}">
+                <form action="{% url 'main:uploadProfile' %}" method="post" enctype="multipart/form-data"
+                      name="img_upload">
                     {% csrf_token %}
                     <div class="profile_header_img_btn1">
-                        <label class="profile_img_label" for="profile_update_file">이미지 업로드</label>
-                        <input type="file" id="profile_update_file" name="profile_img" alt="diary_img"
+                        <label class="profile_img_label" for="profile_update_file">이미지 선택</label>
+                        <input type="file" id="profile_update_file" name="user_profile" alt="user_profile"
                                accept=".jpg,.jpeg,.png" style="display: none">
                     </div>
                     <div class="profile_header_img_btn2">
-                        <input type="submit" value="이미지 제거">
+                        <input type="submit" value="이미지 저장">
                     </div>
                 </form>
             </div>
@@ -57,5 +58,9 @@
             </div>
         </div>
     </div>
+
+    {{ user.user_profile }} <br>
+    {{ user.user_profile.url }} <br>
+    {{ user.user_profile.path }}
 
 {% endblock %}

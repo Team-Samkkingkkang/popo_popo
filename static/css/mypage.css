@@ -28,6 +28,9 @@
 }
 
 .profile_header_img > img {
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -40,6 +43,10 @@
     cursor: pointer;
 }
 
+.profile_img_label:hover {
+    background-color: #f3e9ec;
+}
+
 .profile_header_img_btn2 > input {
     padding: 6px 25px;
     background-color: #ffffff;
@@ -47,5 +54,13 @@
     cursor: pointer;
     color: #783030;
     font-size: 17px;
+    font-weight: bold;
+}
+
+.profile_header_img_btn2 > input:hover {
+    color: #f3e9ec;
+}
+
+.regi_date_title {
     font-weight: bold;
 }

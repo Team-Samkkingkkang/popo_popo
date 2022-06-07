@@ -2,25 +2,36 @@
 
 {% block content %}
 
-    <!-- 박스 시작 -->
-    <div>
-        <div class="content">
-            <div class="content_img">
-                <img src="{{ diary.diary_img.url }}">
-            </div>
-            <div class="content_content">
-                <div class="content_content_detail">
-                    {{diary.diary_content}}
-                </div>
-                <div class="content_dates_buttons">
-                    <p>{{diary.diary_date}}</p>
-                    <button><a href="{% url 'main:diary_update' diary.id %}">수정하기</a></button>
-                    <button><a href="{% url 'main:diary_delete' diary.id %}">삭제하기</a>   </button>
+    <div class="board_content">
 
-                </div>
+        일기 내용 : {{ diary_det.diary_content }}
 
+        <div>
+            <div>
+            <form action="{% url 'main:likes' diary_det.id %}" method='POST'>
+            {% csrf_token %}
+            {% if user in diary_det.like_user.all %}
+                <input type="submit" value='좋아요 취소'>
+            {% else %}
+                <input type="submit" value='좋아요'>
+            {% endif %}
+            </form>
             </div>
+            <div>좋아요: {{ diary_det.like_user.count }}개</div>
         </div>
+
+        {% for comment in diary_det.comment_set.all %}
+            <p>{{ comment.comment_date }}</p>
+            <p>{{ comment.comment_content }}</p>
+        {% endfor %}
+
+        <form method="post" action="{% url 'main:new_comment' diary_det.id %}">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" value="댓글 입력">
+        </form>
+
     </div>
+
 
 {% endblock %}

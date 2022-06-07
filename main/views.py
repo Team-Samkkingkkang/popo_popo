@@ -1,11 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
+from . import models
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary, User
+from main.models import Diary, User, UserImage
+
+from main.forms import CommentForm
 
 
 def diary(request):
@@ -102,12 +105,12 @@ def account(request):
 
 def signup(request):
     # 회원가입 완료 안한 유저
-    if User.objects.get(pk=request.user.pk).user_signup_completed == True:
+    if User.objects.get(pk=request.user.pk).user_signup_completed == False:
         if request.method == "POST":
             if request.POST['user_signup_completed'] == 'True':
                 User.objects.filter(pk=request.user.pk).update(user_nickname=request.POST['user_nickname'],
                                                                user_signup_completed=True)
-            if request.FILES['user_profile']:
+            if request.FILES:
                 user_profile = request.FILES['user_profile']
                 User.objects.filter(pk=request.user.pk).update(user_profile=user_profile)
 
@@ -127,16 +130,57 @@ def board(request):
     return render(request, 'board_page/board.html', context={'diarys': diarys})
 
 
+def board_detail(request, diary_id):
+    diary_det = get_object_or_404(Diary, pk=diary_id)
+    comment_form = CommentForm()
+    return render(request, 'board_page/board_detail.html',
+                  context={'diary_det': diary_det, 'comment_form': comment_form})
+
+
+def likes(request, diary_id):
+    if request.user.is_authenticated:
+        diary = get_object_or_404(Diary, pk=diary_id)
+
+        if diary.like_user.filter(pk=request.user.pk).exists():
+            diary.like_user.remove(request.user)
+        else:
+            diary.like_user.add(request.user)
+        return board_detail(request, diary_id)
+    return redirect('main:account')
+
+
+#### ---- 고해성사 댓글 ---- ####
+def new_comment(request, diary_id):
+    filled_form = CommentForm(request.POST)
+    if filled_form.is_valid():
+        finished_form = filled_form.save(commit=False)
+        finished_form.diary = get_object_or_404(Diary, pk=diary_id)
+        finished_form.save()
+    return redirect('main:board_detail', diary_id)
+
+
 def mypage(request, user_id):
     context = {}
     user = User.objects.get(pk=user_id)
     context['user'] = user
 
-    if request.method == 'POST':
-        if request.FILES:
-            user_profile = request.FILES['user_profile']
-            User.objects.get(pk=user_id).update(user_profile=user_profile)
-        else:
-            return 0;
-
     return render(request, 'account_page/mypage.html', context)
+
+
+def uploadProfile(request):
+    if request.method == "POST":
+        user_profile = request.FILES['user_profile']
+        userimage = UserImage()
+        userimage.user_profile = user_profile
+        userimage.user_id = request.user.id
+        userimage.save()
+        User.objects.filter(pk=request.user.id).update(user_image=UserImage.objects.filter(user_id=request.user.id)[
+            len(UserImage.objects.filter(user_id=request.user.id)) - 1])
+        return redirect('main:mypage', request.user.id)
+    return diary_show(request)
+
+
+'''
+user_id = User.objects.get(pk=request.user.id)
+user_profile = request.FILES['user_profile']
+UserImage.objects.filter(user=user_id).update(user_profile=user_profile)'''

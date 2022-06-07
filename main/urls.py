@@ -1,10 +1,13 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from main import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 app_name = 'main'
+
 
 urlpatterns = [
     # 메인 화면
@@ -32,6 +35,13 @@ urlpatterns = [
 
     # 게시판
     path('board/', views.board, name="board"),
-    path('mypage/<int:user_id>', views.mypage, name="mypage"),
+    path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
+    path('<int:diary_id>/likes/', views.likes, name='likes'),
+    path('mypage/<int:user_id>/', views.mypage, name="mypage"),
+    path('uploadProfile/', views.uploadProfile, name="uploadProfile"),
 
+    # 댓글
+    # path('comment/<int:diary_id>', views.comment, name='comment'),
+    path('new_comment/<int:diary_id>/', views.new_comment, name="new_comment")
 ]
+
