@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="ba_pic">
+        {% load static %}
+        <img src="{% static 'image/ba.png' %}">
+    </div>
+
+    <div class="main">
+        <div class="wz_pic">
+            <img src="{% static 'image/wz.png' %}">
+        </div>
+
+        <div class="bo">
+            <div class="boa">게시판</div>
+            <div class="bi">
+                <div class="not">
+                    <p>·   [공지] 3월 26일 서버 점검 2021.03.14</p>
+                    <p>·   [공지] 내 친구 포포 사용법 2021.05.01 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
