@@ -1,0 +1,42 @@
+.login_btns {
+    width: 768px;
+    align-items: center;
+    margin: 100px auto 0px;
+}
+
+.login_btns_body {
+    text-align: center;
+}
+
+.login_btns_body > div {
+    margin: 20px 0px;
+}
+
+.login_btns_body > h1 {
+    color: var(--text1);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+button {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.kakao_btn_img {
+    width: 10rem;
+    height: auto;
+}
+
+.naver_btn_img {
+    width: 10rem;
+    height: auto;
+}
+
+.google_btn_img {
+    width: 10rem;
+    height: auto;
+}

@@ -4,13 +4,21 @@ from django.utils import timezone
 from datetime import datetime
 import datetime
 
+from config import settings
+
+
+class UserImage(models.Model):
+    user_profile = models.ImageField(default='default_img/diary_default_img.png', upload_to='profile_img/', null=True,
+                                     blank=True)
+    user_id = models.IntegerField(null=True)
+
 
 class User(AbstractUser):
-    user_nickname = models.CharField(max_length=200) # 따로 설정 필요
-    user_profile = models.ImageField(default='default_img/diary_default_img.png') # 따로 설정 필요
+    user_nickname = models.CharField(max_length=200, unique=False)  # 따로 설정 필요
     user_regi_date = models.DateTimeField(auto_now_add=True)
     user_auth_type = models.BooleanField(default=False)
     user_signup_completed = models.BooleanField(default=False)
+    user_image = models.ForeignKey(UserImage, on_delete=models.SET_NULL, null=True)
     # + email 필드 사용
 
 
@@ -70,6 +78,7 @@ class Diary(models.Model):
     diary_img = models.ImageField(upload_to='diary_img/', null=True, blank=True, default='default_img/paper.jpg')
     diary_share_state = models.BooleanField(default=False)
     diary_share_date = models.DateTimeField(auto_now_add=True)
+    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_diary')
 
 
 class Board(models.Model):
@@ -86,8 +95,3 @@ class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     comment_content = models.TextField()
     comment_date = models.DateTimeField(auto_now=True)
-
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)

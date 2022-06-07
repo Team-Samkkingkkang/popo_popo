@@ -1,0 +1,81 @@
+.signup_body {
+    width: 768px;
+    align-items: center;
+    margin: 100px auto 0px;
+    color: var(--text1);
+    line-height: 1.5;
+}
+
+.signup_body_head {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin: 0;
+    padding: 0;
+}
+
+.description {
+    font-size: 1.2rem;
+}
+
+.signup_body_body {
+    margin: 30px 0px;
+}
+
+.signup_body_body_email {
+    padding-bottom: 15px;
+}
+
+.signup_body_body_email_title {
+    font-size: 1.1rem;
+    font-weight: bolder;
+    padding-bottom: 15px;
+}
+
+.signup_body_body_nickname {
+    padding-bottom: 25px;
+}
+
+.signup_body_body_nickname_title {
+    font-size: 1.1rem;
+    font-weight: bolder;
+    padding-bottom: 25px;
+}
+
+.signup_body_body_profile_img {
+    padding-bottom: 100px;
+}
+
+
+input {
+    border: none;
+    padding-bottom: 10px;
+}
+
+input:focus {
+    outline: none;
+}
+
+hr {
+    text-align: left;
+    border: 1px solid #a29f9f;
+    background-color: #a29f9f;
+}
+
+.input_file_button {
+    padding: 6px 25px;
+    background-color: #9b9b9b;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup_body_body_btn > input {
+    padding: 6px 25px;
+    background-color: #f5cec7;
+    border-radius: 25px;
+    cursor: pointer;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
