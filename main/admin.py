@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from main.models import Diary
+from main.models import Diary, Product, ProductOption
 
-from main.models import User
 
 admin.site.register(Diary)
 
-admin.site.register(User)
+admin.site.register(Product)
+
+admin.site.register(ProductOption)

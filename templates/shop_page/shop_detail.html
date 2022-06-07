@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <h1>POPO SHOP</h1>
+    <div class="product_detail">
+        <div class="product_detail_body">
+            {% for productoption in productoption %}
+                <div class="product_detail_body_img">
+                    {% load static %}
+                    <img src="{{ productoption.product.product_img.url }}">
+                </div>
+                <div class="product_detail_body_content">
+                    <div class="product_detail_body_content_name">
+                        {{  productoption.product.product_name  }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

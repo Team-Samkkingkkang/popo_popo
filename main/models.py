@@ -39,6 +39,7 @@ class Product(models.Model):
     product_info = models.CharField(max_length=200)
     product_category = models.CharField(max_length=200)
     product_emotion = models.CharField(max_length=200)
+    product_img = models.ImageField(null=True)
 
 
 class Qna(models.Model):

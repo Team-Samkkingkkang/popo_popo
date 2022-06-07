@@ -6,7 +6,7 @@ from . import models
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary, User, UserImage, Qna
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption
 from main.forms import CommentForm
 
 
@@ -89,7 +89,15 @@ def diary_update(request, diary_id):
 
 #### ---- 포포샵 ---- ####
 def shop(request):
-    return render(request, 'shop_page/shop.html', context={})
+    product = Product.objects.all()
+    productoption = ProductOption.objects.all()
+    return render(request, 'shop_page/shop.html', context={'product':product, 'productoption':productoption})
+
+
+def shop_detail(request, product_id):
+    product = Product.objects.all()
+    productoption = ProductOption.objects.filter(pk=product_id)
+    return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
 
 
 #### ---- 챗봇 ---- ####

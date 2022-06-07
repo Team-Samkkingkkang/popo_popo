@@ -1,0 +1,57 @@
+:root {
+    --text2: #2a2a2a;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text2);
+    padding-top: 10px;
+}
+
+.shop_body {
+    width: 1250px;
+    text-align: center;
+    overflow: hidden;
+    margin: 50px auto;
+}
+
+.shop_body > a {
+    text-decoration: none;
+    color: var(--text2);
+}
+
+.shop_body_body {
+    width: 250px;
+    float: left;
+}
+
+.shop_body_body > div {
+    margin: 15px 30px;
+}
+
+.shop_body_product_info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product_img {
+    width: 200px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.shop_body_product_name {
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--text2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shop_body_product_price {
+    color: #be0404;
+    font-size: 20px;
+    font-weight: bold;
+}
