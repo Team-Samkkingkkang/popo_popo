@@ -111,11 +111,18 @@ def signup(request):
                                                                user_signup_completed=True)
             if request.FILES:
                 user_profile = request.FILES['user_profile']
-                User.objects.filter(pk=request.user.pk).update(user_profile=user_profile)
+                userimage = UserImage()
+                userimage.user_profile = user_profile
+                userimage.user_id = request.user.id
+                userimage.save()
+                User.objects.filter(pk=request.user.id).update(
+                    user_image=UserImage.objects.filter(user_id=request.user.id)[
+                        len(UserImage.objects.filter(user_id=request.user.id)) - 1])
 
             if request.POST['user_email']:
                 User.objects.filter(pk=request.user.pk).update(email=request.POST['user_email'])
             return diary_show(request)
+
 
     # 회원가입 완료한 유저
     elif User.objects.get(pk=request.user.pk).user_signup_completed == True:
@@ -178,6 +185,7 @@ def uploadProfile(request):
         return redirect('main:mypage', request.user.id)
     return diary_show(request)
 
+
 #### ---- QnA ---- ####
 def qna(request):
     qna_list = Qna.objects.all()
@@ -226,7 +234,8 @@ def qna_update(request, qna_id):
         elif request.POST['qna_status'] == 'False':
             Qna.objects.filter(pk=qna_id).update(qna_status=False)
 
-        Qna.objects.filter(pk=qna_id).update(qna_title=request.POST['qna_title'], qna_content=request.POST['qna_content'])
+        Qna.objects.filter(pk=qna_id).update(qna_title=request.POST['qna_title'],
+                                             qna_content=request.POST['qna_content'])
         return qna_detail(request, qna_id)
     qna_detail_object = Qna.objects.get(pk=qna_id)
     return render(request, 'QnA_page/QnA_update.html', context={'qna_detail_object': qna_detail_object})

@@ -42,7 +42,7 @@ urlpatterns = [
 
     # 댓글
     # path('comment/<int:diary_id>', views.comment, name='comment'),
-    path('new_comment/<int:diary_id>/', views.new_comment, name="new_comment")
+    path('new_comment/<int:diary_id>/', views.new_comment, name="new_comment"),
 
     # QnA
     path('QnA/', views.qna, name="qna"),
