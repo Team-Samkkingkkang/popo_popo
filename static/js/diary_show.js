@@ -56,9 +56,9 @@ function share_status(status) {
         success: function (data) {
             console.log(data['share'])
             if (data['share'] === 'True') {
-                $(".modal_share").html(`<button class="send_btn" onclick="share_status('False')" type="button">공유 중지</button>`);
+                $(".modal_share").html(`<button class="send_btn" onclick="share_status('False')" type="button">공유중지</button>`);
             } else if (data['share'] === 'False') {
-                $(".modal_share").html(`<button class="send_btn" onclick="share_status('True')" type="button">공유 하기</button>`);
+                $(".modal_share").html(`<button class="send_btn" onclick="share_status('True')" type="button">공유하기</button>`);
             }
         }
     })
