@@ -3,10 +3,14 @@
     --price-color: #bd0000;
 }
 
-h1 {
-    text-align: center;
-    color: var(--text2);
+.poposhop {
+    width: 1250px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
     padding-top: 10px;
+    padding-left: 30px;
+
 }
 
 .shop_body {

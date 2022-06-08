@@ -3,7 +3,10 @@
 {% block content %}
 
 
-    <h1>POPO SHOP</h1>
+
+    <h1 class="poposhop">POPO SHOP</h1>
+    <hr style="width:1230px; height: 0.3px;">
+
     <div class="product_detail">
         <div class="product_detail_body">
             {% for productoption in productoption %}
@@ -19,22 +22,40 @@
                         {% load humanize %}
                         {{ productoption.option_price | intcomma }}원
                     </div>
-                    <hr>
-                    <div class="product_detail_body_content_count">
-                        <div class="product_detail_body_content_count_content">
-                            <p>구매수량</p>
+
+                    <div class="product_detail_body_content_deliver_info">
+                        <div class="product_detail_body_content_deliver_info_title">배송정보</div>
+                        <div class="product_detail_body_content_deliver_info_content">일반배송 | 2,500원 (20,000원 이상 무료배송)
                         </div>
-                        <div class="product_detail_body_content_count_btn">
-                            <form name="form" method="get">
-                                수량 :
+                    </div>
+                    <hr>
+                    <form name="form" method="get">
+                        <div class="product_detail_body_content_count">
+                            <div class="product_detail_body_content_count_content">
+                                <p>구매수량</p>
+                            </div>
+                            <div class="product_detail_body_content_count_btn">
                                 <input type=hidden name="sell_price" value="{{ productoption.option_price }}">
+                                <input type="button" value=" - " onclick="del();">
                                 <input type="text" name="amount" value="1" size="3" onchange="change();">
                                 <input type="button" value=" + " onclick="add();">
-                                <input type="button" value=" - " onclick="del();">
                                 <br>
-                                금액 : <input type="text" name="sum" size="11" readonly>원
-                            </form>
+                            </div>
                         </div>
+                        <div class="total_price">
+                            <span class="total_price_sum">상품금액 합계 :</span>
+                            <span><input type="text" name="sum" size="3" readonly class="sum_price"></span>
+                            <span class="total_price_sum">원</span>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="last_btn">
+                            <span class="last_btn_1">
+                                장바구니
+                            </span>
+                        <span class="last_btn_2">
+                                바로구매
+                            </span>
                     </div>
                 </div>
             {% endfor %}
@@ -54,6 +75,7 @@
             hm.value++;
             sum.value = parseInt(hm.value) * sell_price;
         }
+
         function del() {
             hm = document.form.amount;
             sum = document.form.sum;
@@ -62,6 +84,7 @@
                 sum.value = parseInt(hm.value) * sell_price;
             }
         }
+
         function change() {
             hm = document.form.amount;
             sum = document.form.sum;
