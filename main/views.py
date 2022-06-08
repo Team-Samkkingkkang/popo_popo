@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from . import models
 # Create your views here.
 
@@ -91,7 +92,7 @@ def diary_update(request, diary_id):
 def shop(request):
     product = Product.objects.all()
     productoption = ProductOption.objects.all()
-    return render(request, 'shop_page/shop.html', context={'product':product, 'productoption':productoption})
+    return render(request, 'shop_page/shop.html', context={'product': product, 'productoption': productoption})
 
 
 def shop_detail(request, product_id):
@@ -200,10 +201,11 @@ def qna(request):
     return render(request, template_name='QnA_page/Qna.html', context={'qna_list': qna_list})
 
 
+@login_required(login_url="/account/")
 def qna_create(request):
     if request.method == "POST":
         qna_temp = Qna()
-        if request.FILES['qna_img']:
+        if request.FILES:
             qna_temp.qna_img = request.FILES['qna_img']
 
         if request.POST['qna_status'] == 'True':
@@ -233,8 +235,9 @@ def qna_delete(request, qna_id):
 
 def qna_update(request, qna_id):
     if request.method == "POST":
-        if request.FILES['qna_img']:
-            Qna.objects.filter(pk=qna_id).update(qna_img=request.FILES['qna_img'])
+        if request.FILES:
+            qna_img = request.FILES['qna_img']
+            Qna.objects.filter(pk=qna_id).update(qna_img=qna_img)
 
         if request.POST['qna_status'] == 'True':
             Qna.objects.filter(pk=qna_id).update(qna_status=True)

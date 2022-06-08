@@ -38,7 +38,7 @@
 }
 
 .modal_main {
-
+    display: flex;
 }
 
 .modal_right {
@@ -62,8 +62,8 @@
 .modal_img {
     width: auto;
     height: auto;
-    max-height: 25rem;
-    max-width: 25rem;
+    max-height: 50rem;
+    max-width: 50rem;
     background-color: #757575;
 }
 
