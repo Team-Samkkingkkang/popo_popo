@@ -2,6 +2,30 @@
 
 {% block content %}
 
-    포포샵 페이지 입니다.
+
+    <h1>POPO SHOP</h1>
+    <div class="shop_body">
+        {% for productoption in productoption %}
+            <a href="{% url 'main:shop_detail' productoption.product.id %}">
+                <div class="shop_body_body">
+                    <div class="shop_body_product_img">
+                        {% load static %}
+                        <img src="{{ productoption.product.product_img.url }}" class="product_img">
+                    </div>
+                    <div class="shop_body_product_name">
+                        {{ productoption.product.product_name }}
+                    </div>
+                    <div class="shop_body_product_info">
+                        {{ productoption.product.product_info }}
+                    </div>
+                    <div class="shop_body_product_price">
+                        {% load humanize %}
+                        {{ productoption.option_price | intcomma }}원
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
 
 {% endblock %}

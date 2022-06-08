@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <h1>POPO SHOP</h1>
+    <div class="product_detail">
+        <div class="product_detail_body">
+            {% for productoption in productoption %}
+                <div class="product_detail_body_img">
+                    {% load static %}
+                    <img src="{{ productoption.product.product_img.url }}">
+                </div>
+                <div class="product_detail_body_content">
+                    <div class="product_detail_body_content_name">
+                        {{ productoption.product.product_name }}
+                    </div>
+                    <div class="product_detail_body_content_price">
+                        {% load humanize %}
+                        {{ productoption.option_price | intcomma }}원
+                    </div>
+                    <hr>
+                    <div class="product_detail_body_content_count">
+                        <div class="product_detail_body_content_count_content">
+                            <p>구매수량</p>
+                        </div>
+                        <div class="product_detail_body_content_count_btn">
+                            <form name="form" method="get">
+                                수량 :
+                                <input type=hidden name="sell_price" value="{{ productoption.option_price }}">
+                                <input type="text" name="amount" value="1" size="3" onchange="change();">
+                                <input type="button" value=" + " onclick="add();">
+                                <input type="button" value=" - " onclick="del();">
+                                <br>
+                                금액 : <input type="text" name="sum" size="11" readonly>원
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <body onload="init();">
+    <script>
+
+        let sell_price = document.form.sell_price.value;
+        let amount = document.form.amount.value;
+        change();
+
+        function add() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            hm.value++;
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+        function del() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            if (hm.value > 1) {
+                hm.value--;
+                sum.value = parseInt(hm.value) * sell_price;
+            }
+        }
+        function change() {
+            hm = document.form.amount;
+            sum = document.form.sum;
+
+            if (hm.value < 0) {
+                hm.value = 0;
+            }
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+    </script>
+
+{% endblock %}

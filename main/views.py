@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
+from . import models
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary, User, Qna
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption
+from main.forms import CommentForm
 
 
 def diary(request):
@@ -87,7 +89,15 @@ def diary_update(request, diary_id):
 
 #### ---- 포포샵 ---- ####
 def shop(request):
-    return render(request, 'shop_page/shop.html', context={})
+    product = Product.objects.all()
+    productoption = ProductOption.objects.all()
+    return render(request, 'shop_page/shop.html', context={'product':product, 'productoption':productoption})
+
+
+def shop_detail(request, product_id):
+    product = Product.objects.all()
+    productoption = ProductOption.objects.filter(pk=product_id)
+    return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
 
 
 #### ---- 챗봇 ---- ####
@@ -107,13 +117,20 @@ def signup(request):
             if request.POST['user_signup_completed'] == 'True':
                 User.objects.filter(pk=request.user.pk).update(user_nickname=request.POST['user_nickname'],
                                                                user_signup_completed=True)
-            if request.FILES['user_profile']:
+            if request.FILES:
                 user_profile = request.FILES['user_profile']
-                User.objects.filter(pk=request.user.pk).update(user_profile=user_profile)
+                userimage = UserImage()
+                userimage.user_profile = user_profile
+                userimage.user_id = request.user.id
+                userimage.save()
+                User.objects.filter(pk=request.user.id).update(
+                    user_image=UserImage.objects.filter(user_id=request.user.id)[
+                        len(UserImage.objects.filter(user_id=request.user.id)) - 1])
 
             if request.POST['user_email']:
                 User.objects.filter(pk=request.user.pk).update(email=request.POST['user_email'])
             return diary_show(request)
+
 
     # 회원가입 완료한 유저
     elif User.objects.get(pk=request.user.pk).user_signup_completed == True:
@@ -130,7 +147,6 @@ def board(request):
 def board_detail(request, diary_id):
     diary_det = get_object_or_404(Diary, pk=diary_id)
     comment_form = CommentForm()
-    comment_form = CommentForm()
     return render(request, 'board_page/board_detail.html',
                   context={'diary_det': diary_det, 'comment_form': comment_form})
 
@@ -145,6 +161,37 @@ def likes(request, diary_id):
             diary.like_user.add(request.user)
         return board_detail(request, diary_id)
     return redirect('main:account')
+
+
+#### ---- 고해성사 댓글 ---- ####
+def new_comment(request, diary_id):
+    filled_form = CommentForm(request.POST)
+    if filled_form.is_valid():
+        finished_form = filled_form.save(commit=False)
+        finished_form.diary = get_object_or_404(Diary, pk=diary_id)
+        finished_form.save()
+    return redirect('main:board_detail', diary_id)
+
+
+def mypage(request, user_id):
+    context = {}
+    user = User.objects.get(pk=user_id)
+    context['user'] = user
+
+    return render(request, 'account_page/mypage.html', context)
+
+
+def uploadProfile(request):
+    if request.method == "POST":
+        user_profile = request.FILES['user_profile']
+        userimage = UserImage()
+        userimage.user_profile = user_profile
+        userimage.user_id = request.user.id
+        userimage.save()
+        User.objects.filter(pk=request.user.id).update(user_image=UserImage.objects.filter(user_id=request.user.id)[
+            len(UserImage.objects.filter(user_id=request.user.id)) - 1])
+        return redirect('main:mypage', request.user.id)
+    return diary_show(request)
 
 
 #### ---- QnA ---- ####
