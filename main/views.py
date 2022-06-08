@@ -93,10 +93,17 @@ def diary_update(request, diary_id):
 
 #### ---- 포포샵 ---- ####
 def shop(request):
-    product = Product.objects.all()
-    productoption = ProductOption.objects.all()
-    return render(request, 'shop_page/shop.html', context={'product': product, 'productoption': productoption})
-
+    prices = []
+    products = Product.objects.all()
+    for product in products:
+        min_ = 1000000000000
+        for i in ProductOption.objects.filter(product=product.id):
+            if i.option_price < min_:
+                min_ = i.option_price
+            prices.append(min_)
+    print(prices)
+    product = zip(products, prices)
+    return render(request, 'shop_page/shop.html', context={'product': product})
 
 
 def shop_detail(request, product_id):

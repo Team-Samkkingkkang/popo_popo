@@ -6,22 +6,22 @@
     <h1 class="poposhop">POPO SHOP</h1>
     <hr style="width:1230px; height: 0.3px;">
     <div class="shop_body">
-        {% for productoption in productoption %}
-            <a href="{% url 'main:shop_detail' productoption.product.id %}">
+        {% for product, price in product %}
+            <a href="{% url 'main:shop_detail' product.id %}">
                 <div class="shop_body_body">
                     <div class="shop_body_product_img">
                         {% load static %}
-                        <img src="{{ productoption.product.product_img.url }}" class="product_img">
+                        <img src="{{ product.product_img.url }}" class="product_img">
                     </div>
                     <div class="shop_body_product_name">
-                        {{ productoption.product.product_name }}
+                        {{ product.product_name }}
                     </div>
                     <div class="shop_body_product_info">
-                        {{ productoption.product.product_info }}
+                        {{ product.product_info }}
                     </div>
                     <div class="shop_body_product_price">
                         {% load humanize %}
-                        {{ productoption.option_price | intcomma }}원
+                        {{ price | intcomma }}원
                     </div>
                 </div>
             </a>
