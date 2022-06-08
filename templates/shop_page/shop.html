@@ -3,7 +3,8 @@
 {% block content %}
 
 
-    <h1>POPO SHOP</h1>
+    <h1 class="poposhop">POPO SHOP</h1>
+    <hr style="width:1230px; height: 0.3px;">
     <div class="shop_body">
         {% for productoption in productoption %}
             <a href="{% url 'main:shop_detail' productoption.product.id %}">

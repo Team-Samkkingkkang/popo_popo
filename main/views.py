@@ -7,7 +7,7 @@ from . import models
 # Create your views here.
 
 #### ---- 다이어리 ---- ####
-from main.models import Diary, User, UserImage, Qna, Product, ProductOption
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, Basket
 from main.forms import CommentForm
 
 
@@ -99,6 +99,12 @@ def shop_detail(request, product_id):
     product = Product.objects.all()
     productoption = ProductOption.objects.filter(pk=product_id)
     return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
+
+
+def basket(request, user_id):
+    user = User.objects.all()
+    basket = Basket.objects.filter(pk=user_id)
+    return render(request, 'shop_page/basket.html', context={'basket':basket, 'user':user})
 
 
 #### ---- 챗봇 ---- ####
