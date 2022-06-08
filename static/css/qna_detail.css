@@ -1,0 +1,112 @@
+.qna_detail_title {
+    margin-left: 280px;
+    font-weight: 700;
+    font-size: 44px;
+}
+
+.qna_detail_line {
+    width: 1400px;
+    height: 0px;
+    border: 1px solid #000000;
+
+    margin-bottom: 50px;
+
+}
+
+.qna_detail_box {
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    width: 1400px;
+    height: 440px;
+
+    border: 0.3px solid #000000;
+    /*border-top-left-radius: 20px;*/
+    /*border-top-right-radius: 20px;*/
+    border-radius: 20px;
+
+    background: rgba(248, 243, 243, 0.78);
+}
+
+.qna_detail_foot {
+    display: flex;
+    justify-content: right;
+
+    font-weight: 600;
+    font-size: 16px;
+
+    margin-right: 250px;
+}
+
+.qna_detail_btn1 {
+    text-align: center;
+    box-sizing: border-box;
+
+    width: 124px;
+    height: 44px;
+
+    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-right: 20px;
+
+    padding-top: 10px;
+
+    background: rgba(248, 243, 243, 0.78);
+    border: 1px solid #707070;
+    border-radius: 10px;
+}
+
+.qna_detail_btn2 {
+    text-align: center;
+    box-sizing: border-box;
+
+    width: 124px;
+    height: 44px;
+
+    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-right: 20px;
+
+    padding-top: 10px;
+
+    background: rgba(248, 243, 243, 0.78);
+    border: 1px solid #707070;
+    border-radius: 10px;
+}
+
+.qna_detail_body {
+    box-sizing: border-box;
+    width: 1397px;
+    height: 40px;
+    background: #FFFFFF;
+    border-top: 1px solid #8C8B8B;
+    border-bottom: 1px solid #8C8B8B;
+    /*border-right: 1px solid #707070;*/
+    padding-top: 7px;
+}
+
+.qna_detail_content {
+    box-sizing: border-box;
+    width: auto;
+    height: 344px;
+    padding-top: 10px;
+    padding-left: 30px;
+    background: #FFFFFF;
+
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.de_tit {
+    padding-left: 30px;
+}
+
+.de_bo {
+    padding-left: 30px;
+}
+
+.de_bo2 {
+    padding-right: 20px;
+}
