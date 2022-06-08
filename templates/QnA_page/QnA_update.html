@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class='qna_wirte_head'> QnA 작성하기 </h1>
-    <form enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        <input type="text" name="qna_title" value="{{ qna_detail_object.qna_title }}" required>
-        <input type="text" name="qna_content" value="{{ qna_detail_object.qna_content }}" required>
-        <input type="file" name="qna_img" alt="qna_img" value="{{ qna_detail_object.qna_img }}" accept=".jpg,.jpeg,.png">
-        <select name="qna_status">
-            <option value="False">관리자 아님</option>
-            <option value="True">관리자 권한</option>
-        </select>
-        <input type="submit">
-    </form>
+<h1 class='qna_update_head'> QnA 수정하기 </h1>
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <div class = 'update_table'>
+        <table>
+            <div class="siu">
+                <tr>
+                    <td>제목</td>
+                    <td><input class='qna_update_title' type="text" name="qna_title"
+                               value="{{ qna_detail_object.qna_title }}" required></td>
+                </tr>
+            </div>
+            <tr>
+                <td>내용</td>
+                <td><input class='qna_update_content' type="text" name="qna_content"
+                           value="{{ qna_detail_object.qna_content }}" required></td>
+            </tr>
+            <tr>
+                <td>첨부파일</td>
+                <td><input type="file" name="qna_img" alt="qna_img" value="{{ qna_detail_object.qna_img }}"
+                           accept=".jpg,.jpeg,.png"></td>
+            </tr>
 
+        </table>
+        <!--        <input type="text" name="qna_title" value="{{ qna_detail_object.qna_title }}" required>-->
+        <!--        <input type="text" name="qna_content" value="{{ qna_detail_object.qna_content }}" required>-->
+        <!--        <input type="file" name="qna_img" alt="qna_img" value="{{ qna_detail_object.qna_img }}" accept=".jpg,.jpeg,.png">-->
+
+        <div class='qna_update_foot'>
+            <tr>
+                <td>
+                    <select class='qna_select' name="qna_status">
+                        <option value="False">관리자 아님</option>
+                        <option value="True">관리자 권한</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class='qna_update_submit' type="submit"></td>
+            </tr>
+        </div>
+        <!--    <select name="qna_status">-->
+        <!--        <option value="False">관리자 아님</option>-->
+        <!--        <option value="True">관리자 권한</option>-->
+        <!--    </select>-->
+        <!--    <input type="submit">-->
+</form>
+</div>
 {% endblock %}

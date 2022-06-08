@@ -3,8 +3,10 @@
 {% block content %}
 
 
+
     <h1 class="poposhop">POPO SHOP</h1>
     <hr style="width:1230px; height: 0.3px;">
+
     <div class="product_detail">
         <div class="product_detail_body">
             {% for productoption in productoption %}
@@ -20,6 +22,7 @@
                         {% load humanize %}
                         {{ productoption.option_price | intcomma }}원
                     </div>
+
                     <div class="product_detail_body_content_deliver_info">
                         <div class="product_detail_body_content_deliver_info_title">배송정보</div>
                         <div class="product_detail_body_content_deliver_info_content">일반배송 | 2,500원 (20,000원 이상 무료배송)
