@@ -10,19 +10,15 @@
 {% load static %}
 
 <div class="chat">
-    <div class="chatheader">
-        POPO CHAT
-    </div>
     <div class="chatbox">
         <div class="chatQ"></div>
-        <div class="chatA"></div>
     </div>
     <div class="chatfooter">
         <div class="go1">
             {% load static %}
             <img src="{% static 'image/go1.png' %}">
         </div>
-        <input id="chattext" class="typet" placeholder="Type text" onclick=this.value="Type_text">
+        <input id="chattext" class="typet" placeholder="Type text" onclick=this.value="">
         <div class="go2">
             <button id="sendbtn" onclick="sendAsk()"><img src="{% static 'image/go2.png' %}"></button>
         </div>
@@ -42,13 +38,13 @@
             return false;
         }
 
-
         addtext += "<div style='margin: 3rem 5rem; text-align: right;'>" +
-            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 1.5rem;'>" + ctext + "</span></div>"
+            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 20px;'>" + ctext + "</span></div>"
         addtext += "<div style='margin: 3rem 5rem; text-align: left;'>" +
-            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 1.5rem;'>" + "나는 포포다" + "</span></div>"
+            "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 20px;'>" + "나는 포포다" + "</span></div>"
         $(".chatQ").html(addtext);
     }
+
 
 </script>
 
