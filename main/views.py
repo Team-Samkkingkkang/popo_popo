@@ -127,6 +127,26 @@ def board(request):
     return render(request, 'board_page/board.html', context={'diarys': diarys})
 
 
+def board_detail(request, diary_id):
+    diary_det = get_object_or_404(Diary, pk=diary_id)
+    comment_form = CommentForm()
+    comment_form = CommentForm()
+    return render(request, 'board_page/board_detail.html',
+                  context={'diary_det': diary_det, 'comment_form': comment_form})
+
+
+def likes(request, diary_id):
+    if request.user.is_authenticated:
+        diary = get_object_or_404(Diary, pk=diary_id)
+
+        if diary.like_user.filter(pk=request.user.pk).exists():
+            diary.like_user.remove(request.user)
+        else:
+            diary.like_user.add(request.user)
+        return board_detail(request, diary_id)
+    return redirect('main:account')
+
+
 #### ---- QnA ---- ####
 def qna(request):
     qna_list = Qna.objects.all()
@@ -175,7 +195,8 @@ def qna_update(request, qna_id):
         elif request.POST['qna_status'] == 'False':
             Qna.objects.filter(pk=qna_id).update(qna_status=False)
 
-        Qna.objects.filter(pk=qna_id).update(qna_title=request.POST['qna_title'], qna_content=request.POST['qna_content'])
+        Qna.objects.filter(pk=qna_id).update(qna_title=request.POST['qna_title'],
+                                             qna_content=request.POST['qna_content'])
         return qna_detail(request, qna_id)
     qna_detail_object = Qna.objects.get(pk=qna_id)
     return render(request, 'QnA_page/QnA_update.html', context={'qna_detail_object': qna_detail_object})

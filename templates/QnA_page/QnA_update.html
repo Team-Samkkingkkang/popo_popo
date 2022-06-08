@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <h1 class='qna_wirte_head'> QnA 작성하기 </h1>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         <input type="text" name="qna_title" value="{{ qna_detail_object.qna_title }}" required>

@@ -32,6 +32,8 @@ urlpatterns = [
 
     # 게시판
     path('board/', views.board, name="board"),
+    path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
+    path('<int:diary_id>/likes/', views.likes, name='likes'),
 
     # QnA
     path('QnA/', views.qna, name="qna"),

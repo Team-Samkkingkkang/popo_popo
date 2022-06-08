@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ qna_detail_object.qna_title }}
-    {{ qna_detail_object.qna_date }}
-    {{ qna_detail_object.user.user_nickname }}
-    {{ qna_detail_object.qna_content }}
-    <img src="{{ qna_detail_object.qna_img.url }}">
-    <a href="{% url 'main:qna_delete' qna_detail_object.id %}">삭제하기</a>
-    <a href="{% url 'main:qna_update' qna_detail_object.id %}">수정하기</a>
+<h1 class='qna_detail_title'>QnA</h1>
+<hr class='qna_detail_line'>
+<div class='qna_detail_box'>
+    <div class="qna_detail_tit">
+        <p class="de_tit">{{ qna_detail_object.qna_title }}</p>
+    </div>
+    <div class="qna_detail_body">
+        <div class="de_bo">
+            <a class = 'de_bo2'>작성자 : {{ qna_detail_object.user.user_nickname }}</a>
+            <a>작성일자 : {{ qna_detail_object.qna_date }}</a>
+        </div>
+    </div>
+    <div class='qna_detail_content'>
+        <div class="de_co">
+            <p>{{ qna_detail_object.qna_content }}</p>
+            <p><img src="{{ qna_detail_object.qna_img.url }}"></p>
+        </div>
+    </div>
+</div>
+<div class="qna_detail_foot">
+    <tr>
+        <td><a class='qna_detail_btn1' href="{% url 'main:qna_delete' qna_detail_object.id %}">삭제하기</a></td>
+        <td><a class='qna_detail_btn2' href="{% url 'main:qna_update' qna_detail_object.id %}">수정하기</a></td>
+    </tr>
+</div>
 {% endblock %}

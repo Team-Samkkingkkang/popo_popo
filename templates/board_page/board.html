@@ -1,29 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% load static %}
-    <div clss="board_main">
-        {% for diary in diarys %}
-            <div class="board_box">
-                <div class="board_body">
-                    <div class="board_content">
-                        <div class="board_content_head">
-                            <img src="{% static 'image/popo_main.png' %}">
-                            <span class="board_user_name">익명1</span>
-                            <span class="board_date">{{ diary.diary_date }}</span>
-                        </div>
-                        <div class="board_content_body">{{ diary.diary_content }}</div>
-                        <div class="board_content_status">좋아요/댓글 표시
-                        </div>
-                    </div>
-                    <div class="board_image">
-                        <img src="{{ diary.diary_img.url }}">
-                    </div>
-                </div>
-                <div class="board_comment"></div>
+{% load static %}
+<div class="board_title">
+    <h1>게시판</h1>
+</div>
+<!--<div style="width: 100%">-->
+<!--    <div style="display: inline-block; background-color: #6F4918; width: 5rem">다연짜응</div>-->
+<!--    <div style="display: inline-block; background-color: #7A6E6E; width: 5rem">사진</div>-->
+<!--</div>-->
+
+<div class="board_emotion">
+    <button id="emo_btn1" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_yellow.png' %}">
+    </button>
+    <button id="emo_btn2" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_purple.png' %}">
+    </button>
+    <button id="emo_btn3" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_blue.png' %}">
+    </button>
+    <button id="emo_btn4" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_red.png' %}">
+    </button>
+    <button id="emo_btn5" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_green.png' %}">
+    </button>
+    <button id="emo_btn6" type="button" role="button" class="btn_theme1" aria-pressed="false">
+        <img src="{% static 'image/popo_orange.png' %}">
+    </button>
+</div>
+<div class="board_body">
+    {% for diary in diarys %}
+    <div class="board_body_body">
+        <span class="board_body_body_left">
+            <div class="board_body_body_head">
+            <img style="width: 80px; height: 80px" src="{% static 'image/popo_orange.png' %}">
+            <span class="board_nick"> 다연짜응 {{ diary.diary_date }}</span>
             </div>
-        {% endfor %}
+            <div class="board_body_content">
+                {{ diary.diary_content }}
+            </div>
+        </span>
+        <span class='board_body_img'>
+            <img style="width: 200px; height: 200px" src="{{ diary.diary_img.url }}">
+        </span>
     </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
 

@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for qna in qna_list %}
-        <div>
-            <a href="{% url 'main:qna_detail' qna.id %}">{{ qna.qna_title }}</a>
-            {{ qna.qna_date }}
-            {{ qna.user.user_nickname }}
+    <h2 class='qna_title'> QnA </h2>
+    <div class="search_bar">
+        <div class='search_bar_body'>
+            <input type="text" placeholder="검색어 입력">
+            <button>검색</button>
         </div>
-    {% endfor %}
+    </div>
 
-    <a href="{% url 'main:qna_create' %}">질문하기</a>
+    <div class='qna_table'>
+        <table class='table_type'>
+            <thead>
+            <tr>
+                <th scope="cols">번호</th>
+                <th scope="cols">제목</th>
+                <th scope="cols">작성일자</th>
+                <th scope="cols">작성자</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for qna in qna_list %}
+                <tr>
+                    <td>1</td>
+                    <td><a href="{% url 'main:qna_detail' qna.id %}">{{ qna.qna_title }}</a></td>
+                    <td>{{ qna.qna_date }}</td>
+                    <td>{{ qna.user.user_nickname }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class = 'qna_btn_box'>
+        <button class = 'qna_btn'>
+            <a class = 'qna_write' href="{% url 'main:qna_create' %}">질문하기</a>
+        </button>
+    </div>
 {% endblock %}
