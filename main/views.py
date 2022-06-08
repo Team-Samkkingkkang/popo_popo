@@ -18,10 +18,12 @@ def diary(request):
     return render(request, 'diary_page/diary.html', context={})
 
 
+@login_required(login_url="/account/")
 def diary_create(request):
     if request.method == 'POST':
 
         diary_model = Diary()
+        diary_model.user = request.user
         if request.FILES:
             diary_img = request.FILES['diary_img']
             diary_model.diary_img = diary_img
@@ -39,8 +41,9 @@ def diary_create(request):
     return render(request, 'diary_page/diary_create.html', context={})
 
 
+@login_required(login_url="/account/")
 def diary_show(request):
-    diarys = Diary.objects.all()
+    diarys = Diary.objects.filter(user=request.user)
     return render(request, 'diary_page/diary_show.html', context={'diarys': diarys})
 
 
@@ -111,11 +114,11 @@ def shop_detail(request, product_id):
     productoption = ProductOption.objects.filter(pk=product_id)
     return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
 
+
 def basket(request, user_id):
     user = User.objects.all()
     basket = Basket.objects.filter(pk=user_id)
-    return render(request, 'shop_page/basket.html', context={'basket':basket, 'user':user})
-
+    return render(request, 'shop_page/basket.html', context={'basket': basket, 'user': user})
 
 
 #### ---- 챗봇 ---- ####

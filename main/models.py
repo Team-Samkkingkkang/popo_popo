@@ -39,7 +39,7 @@ class Product(models.Model):
     product_info = models.CharField(max_length=200)
     product_category = models.CharField(max_length=200)
     product_emotion = models.CharField(max_length=200)
-    product_img = models.ImageField(null=True)
+    product_img = models.ImageField(null=True, upload_to='product_img/')
 
 
 class Qna(models.Model):
