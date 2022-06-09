@@ -23,6 +23,8 @@ urlpatterns = [
     # 포포샵
     path('shop/', views.shop, name="shop"),
     path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
+    path('basket_dayeon/', TemplateView.as_view(template_name='shop_page/basket.html'), name="basket_dayeon"),
+    path('basket_dayeon2/', TemplateView.as_view(template_name='shop_page/order_complete.html'), name="basket_dayeon2"),
     path('basket/<int:product_id>/', views.basket, name="basket"),
     path('payment_siu/', TemplateView.as_view(template_name='shop_page/order_pyment.html'), name="payment_siu"),
 
@@ -33,6 +35,8 @@ urlpatterns = [
     path('account/', views.account, name="account"),
     path('account/signup/', views.signup, name="signup"),
     path('account/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('account_dayeon3/', TemplateView.as_view(template_name='account_page/order_history.html'),
+         name="account_dayeon3"),
 
     # 게시판
     path('board/', views.board, name="board"),
