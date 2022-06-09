@@ -39,7 +39,11 @@ class Product(models.Model):
     product_info = models.CharField(max_length=200)
     product_category = models.CharField(max_length=200)
     product_emotion = models.CharField(max_length=200)
+<<<<<<< HEAD
+    product_img = models.ImageField(null=True, upload_to='product_img/')
+=======
     product_img = models.ImageField(null=True, upload_to='profile_img/')
+>>>>>>> 47f1e26cb2e9e1210cac10c15265b233ee130d52
 
 
 class Qna(models.Model):
