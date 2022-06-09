@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div></div>
+    <div>
+        <div class='order_head'>
+            <h1 class="order_title"> Order&Payment </h1>
+            <!--    <hr class = 'bas_title_line' >-->
+            <hr class='order_line'>
+        </div>
+    </div>
+    <div class="wjscp">
+        <div class="deliinfo">
+            <div><h3>배송지 정보</h3></div>
+        </div>
+        <div class="deli_table">
+            <table class="table_m">
+
+                <tr class="b1">
+                    <th class="table_h">배송지 선택</th>
+                    <td class="table_r">
+                        <form method="POST" class="radios">
+                            <p><label><input class="radio_deli1" type="radio" name="nb[]" value="01">기본 배송지</label></p>
+                            <p><label><input class="radio_deli2" type="radio" name="nb[]" value="01">신규 배송지</label></p>
+                        </form>
+                        <form>
+                            <select class="sel" name="adress">
+                                <option value="none">선택해주세요</option>
+                                <option value="siu">시우</option>
+                                <option value="heyho">세은</option>
+                                <option value="wanda">다연</option>
+                                <option value="gabang">가영</option>
+                            </select>
+                            <input type="submit"
+                                   style="text-align: center; padding: 4px 5px 4px 4px; border-radius: 0.3rem;"
+                                   value="선택">
+                        </form>
+
+                    </td>
+                </tr>
+                <tr class="b2">
+                    <th class="table_h">배송지명</th>
+                    <td class="table_r">
+                        <p style="font-size: 1rem; margin-left: 3rem;">강시우 집</p>
+                    </td>
+                </tr>
+                <tr class="b3">
+                    <th class="table_h">받는분</th>
+                    <td class="table_r">
+                        <div class="bada">
+                            <p style="font-size: 1.5rem; color: red; margin-left: 3rem; height: 25px"> * </p>
+                            <input type="text"
+                                   style="font-size: 1rem; margin-left: 1rem; border: 1px solid #ccc; height: 1rem; width: 9rem; border-radius: 0.3rem; padding-left: 1rem;">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="b4">
+                    <th class="table_h">연락처</th>
+                    <td class="table_r">
+                        <div class="number">
+                            <p style="font-size: 1.5rem; color: red; margin-left: 3rem; height: 30px"> * </p>
+                            <div>
+                                <input type="text"
+                                       style="font-size: 1rem; margin-right: 1rem; margin-left: 1rem; border: 1px solid #ccc; height: 1rem; width: 4rem; border-radius: 0.3rem; padding-left: 1rem;"></input>
+                            </div>
+                            <p style="height: 30px;"> - </p>
+                            <div>
+                                <input type="text"
+                                       style="font-size: 1rem; margin-right: 1rem; margin-left: 1rem; border: 1px solid #ccc; height: 1rem; width: 4rem; border-radius: 0.3rem; padding-left: 1rem;"></input>
+                            </div>
+                            <p style="height: 30px;"> - </p>
+                            <div>
+                                <input type="text"
+                                       style="font-size: 1rem; margin-right: 1rem; margin-left: 1rem; border: 1px solid #ccc; height: 1rem; width: 4rem; border-radius: 0.3rem; padding-left: 1rem;"></input>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="b5">
+                    <th class="table_h">주소</th>
+                    <td class="table_r">
+                        <div class="up">
+                            <p style="font-size: 1.5rem; color: red; margin-left: 3rem; height: 30px"> * </p>
+                            <div class="up_btn">
+                                <input type="text"
+                                       style="font-size: 1rem; margin-right: 1rem; margin-left: 1rem; border: 1px solid #ccc; height: 1rem; width: 6rem; border-radius: 0.3rem; padding-left: 1rem;">
+                                <input type="submit"
+                                       style="text-align: center; padding: 0.3rem 0.5rem 0.3rem 0.5rem; border-radius: 0.3rem;"
+                                       value="우편번호">
+                            </div>
+                        </div>
+                        <input type="text"
+                               style="font-size: 1rem; margin :0.1rem 1rem 0rem 4.6rem; border: 1px solid #ccc; height: 3rem; width: 30rem; border-radius: 0.3rem; padding-left: 1rem;">
+                        <br>
+                        <input type="text"
+                               style="font-size: 1rem; margin :0.7rem 1rem 0.7rem 4.6rem; border: 1px solid #ccc; height: 1rem; width: 10rem; border-radius: 0.3rem; padding-left: 1rem;">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 5rem; color: var(--header-text-color);"><h3>배송 메세지</h3></div>
+        <div class="message_table">
+            <table class="table_mr">
+
+                <tr class="b6">
+                    <th class="table_hr">배송지 메세지</th>
+                    <td class="table_rr">
+                        <form>
+                            <select class="selr" name="tec">
+                                <option value="none">선택해주세요</option>
+                                <option value="gb">경비실에 맡겨주세요.</option>
+                                <option value="hg">현관에 두고 가주세요.</option>
+                                <option value="yr">배송 전 연락 바랍니다.</option>
+                                <option value="mn">만나서 전달해주세요.</option>
+                            </select>
+                            <input type="submit" style="text-align: center; padding: 4px; border-radius: 0.3rem;"
+                                   value="선택">
+                        </form>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div style="margin-top: 5rem; color: var(--header-text-color);"><h3>배송 상품</h3></div>
+        <div class="chong_table">
+            <table class="table_mrrr">
+                <tr class="table_hrrr">
+                    <th style="width: 35rem;">상품정보</th>
+                    <th style="width: 10.5rem;">판매가</th>
+                    <th style="width: 9rem;">수량</th>
+                    <th style="width: 10.5rem;">구매가</th>
+                    <th style="width: 12rem;">배송정보</th>
+                </tr>
+                <tr class="table_rrrr">
+                    <td class="proinfo" style="width: 35rem; border-right: 1px solid #ccc; text-align: left;">
+                        <div style="width: 5rem; height: 5rem; border: 1px solid #783030; margin-left: 3rem;"></div>
+                        <div>
+                            <p style="margin-left: 3rem;">Papier d'armeni Paper Incense</p>
+                            <p style="margin-left: 3rem;">옵션 : 로즈우드 향</p>
+                        </div>
+                    </td>
+                    <td style="width: 10.5rem; border-right: 1px solid #ccc;">12,000원</td>
+                    <td style="width: 9rem; border-right: 1px solid #ccc;">1</td>
+                    <td style="width: 10.5rem; border-right: 1px solid #ccc;">6,900원</td>
+                    <td style="width: 12rem;">배송비 2,500원</td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 5rem; color: var(--header-text-color);"><h3>최종결제 정보</h3></div>
+        <div class="payment_table">
+            <table class="table_mrr">
+                <tr class="b6">
+                    <th class="table_hrr">총 상품금액</th>
+                    <td class="table_rrr">
+                        <p style="font-size: 1.2rem; margin-left: 3rem;">6,900원</p>
+                    </td>
+                </tr>
+                <tr class="b7">
+                    <th class="table_hrr">총 배송지</th>
+                    <td class="table_rrr">
+                        <p style="font-size: 1.2rem; margin-left: 3rem;">2,500원</p>
+                    </td>
+                </tr>
+                <tr class="b8">
+                    <th class="table_hrr">최종 결제금액</th>
+                    <td class="table_rrr">
+                        <p style="font-size: 1.7rem; margin-left: 3rem; color: red;">9,400원</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <input type="submit" class="payment_btn" value="결제하기">
+                    </th>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
