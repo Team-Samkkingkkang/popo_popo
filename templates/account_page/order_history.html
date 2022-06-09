@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div class='order_history_head'>
+        <h1 class="order_history_title"> 주문내역 확인 </h1>
+        <hr class='order_history_line'>
+    </div>
+    <table class="order_history_table">
+        <thead class="order_table_type">
+        <tr>
+            <th>번호</th>
+            <th>상품정보</th>
+            <th>수량</th>
+            <th>구매가</th>
+            <th>배송정보</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>1</th>
+            <td>상품정보</td>
+            <td>수량</td>
+            <td>구매가</td>
+            <td>배송정보</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4"></td>
+            <td>총 금액</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}

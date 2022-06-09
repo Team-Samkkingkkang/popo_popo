@@ -1,0 +1,131 @@
+.order_complete_title {
+    width: 1250px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
+    padding-top: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.order_complete_line {
+    width: 1230px;
+    border: 2px solid #EEDFDF;
+}
+
+.order_complete_body {
+    text-align: center;
+    margin-top: 90px;
+}
+
+.order_complete_username {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
+}
+
+.order_complete_tx {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
+}
+
+.order_complete_num {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #605F5F;
+}
+
+.order_complete_btn_box {
+    margin-top: 80px;
+}
+
+.order_complete_btn {
+    box-sizing: border-box;
+    width: 150px;
+    height: 60px;
+    background: #FFFFFF;
+    border: 1px solid #DD7878;
+    border-radius: 10px;
+
+    margin-right: 10px;
+}
+
+.order_complete_cs {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    color: #DD7878;
+}
+
+.order_complete_btn2 {
+    box-sizing: border-box;
+    width: 150px;
+    height: 60px;
+    background: #DD7878;
+    border: 1px solid #DD7878;
+    border-radius: 10px;
+}
+
+.order_complete_mp {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.order_complete_under_line {
+    width: 1250px;
+    border: 1px solid #605F5F;
+
+    margin-top: 70px;
+}
+
+.order_complete_sub_title {
+    width: 1250px;
+    margin: 30px auto;
+    display: flex;
+    color: var(--header-text-color);
+}
+
+ /*시우거 */
+
+.chong2_table_box {
+    width: 1300px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.chong2_table {
+    border-top: 3px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 1250px;
+    display: flex;
+}
+
+.table_hrrr2 {
+    height: 3rem;
+    background: #fcfbfb;
+    color: var(--header-text-color);
+    border-bottom: 1px solid #ccc;
+}
+
+.table_mrrr2 {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+
+.table_rrrr2 {
+    text-align: center;
+    height: 8rem;
+}
+
+.proinfo2 {
+    display: flex ;
+    align-items: center;
+    height: 128px;
+}
