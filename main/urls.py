@@ -25,7 +25,7 @@ urlpatterns = [
     # 포포샵
     path('shop/', views.shop, name="shop"),
     path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
-    path('basket/<int:user_id>/', views.basket, name="basket"),
+    path('basket/<int:product_id>/', views.basket, name="basket"),
 
     # 챗봇
     path('chatbot/', views.chatbot, name="chatbot"),

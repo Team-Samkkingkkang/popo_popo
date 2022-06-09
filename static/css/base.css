@@ -19,10 +19,13 @@ header {
 }
 
 .login {
+    width: 1000px;
+    align-items: center;
     display: flex;
     justify-content: flex-end;
     padding-top: 10px;
-    padding-right: 330px;
+    padding-right: 10px;
+    margin: 0px auto;
 }
 
 .login > ul {
@@ -45,8 +48,10 @@ header {
 }
 
 .header_list {
+    width: 1000px;
+    margin: 0px auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
 }
