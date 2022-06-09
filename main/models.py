@@ -39,7 +39,7 @@ class Product(models.Model):
     product_info = models.CharField(max_length=200)
     product_category = models.CharField(max_length=200)
     product_emotion = models.CharField(max_length=200)
-    product_img = models.ImageField(null=True)
+    product_img = models.ImageField(null=True, upload_to='profile_img/')
 
 
 class Qna(models.Model):
@@ -49,12 +49,6 @@ class Qna(models.Model):
     qna_date = models.DateTimeField(auto_now=True)
     qna_img = models.ImageField(null=True, blank=True)
     qna_status = models.BooleanField()
-
-
-class Basket(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    basket_price = models.IntegerField()
-    basket_delivery_fee = models.IntegerField()
 
 
 class ProductOption(models.Model):
@@ -67,7 +61,6 @@ class ProductOption(models.Model):
 class OrderCount(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE)
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
     order_count_count = models.IntegerField()
     order_count_price = models.IntegerField()
 
