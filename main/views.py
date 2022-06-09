@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from . import models
 # Create your views here.
 
-#### ---- 다이어리 ---- ####
 
 from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, Basket
 from main.forms import CommentForm
@@ -18,10 +17,12 @@ def diary(request):
     return render(request, 'diary_page/diary.html', context={})
 
 
+@login_required(login_url="/account/")
 def diary_create(request):
     if request.method == 'POST':
 
         diary_model = Diary()
+        diary_model.user = request.user
         if request.FILES:
             diary_img = request.FILES['diary_img']
             diary_model.diary_img = diary_img
@@ -39,8 +40,9 @@ def diary_create(request):
     return render(request, 'diary_page/diary_create.html', context={})
 
 
+@login_required(login_url="/account/")
 def diary_show(request):
-    diarys = Diary.objects.all()
+    diarys = Diary.objects.filter(user=request.user)
     return render(request, 'diary_page/diary_show.html', context={'diarys': diarys})
 
 
@@ -93,22 +95,45 @@ def diary_update(request, diary_id):
 
 #### ---- 포포샵 ---- ####
 def shop(request):
-    product = Product.objects.all()
-    productoption = ProductOption.objects.all()
-    return render(request, 'shop_page/shop.html', context={'product': product, 'productoption': productoption})
-
+    prices = []
+    products = Product.objects.all()
+    for product in products:
+        min_ = 1000000000000
+        for i in ProductOption.objects.filter(product=product.id):
+            if i.option_price < min_:
+                min_ = i.option_price
+            prices.append(min_)
+    print(prices)
+    product = zip(products, prices)
+    return render(request, 'shop_page/shop.html', context={'product': product})
 
 
 def shop_detail(request, product_id):
-    product = Product.objects.all()
-    productoption = ProductOption.objects.filter(pk=product_id)
-    return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
+    product = Product.objects.get(pk=product_id)
+    product_option = ProductOption.objects.filter(product=product)
 
+    price = 1000000000000
+    for i in product_option:
+        if i.option_price < price:
+            price = i.option_price
+
+    return render(request, 'shop_page/shop_detail.html',
+                  context={'product': product, 'product_option': product_option, 'price': price})
+
+
+def basket(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    product_option = ProductOption.objects.filter(product=product)
+    return render(request, 'shop_page/basket.html', context={'product': product, 'product_option': product_option})
+
+
+<<<<<<< HEAD
 def basket(request, user_id):
     user = User.objects.all()
     basket = Basket.objects.filter(pk=user_id)
-    return render(request, 'shop_page/basket.html', context={'basket':basket, 'user':user})
-
+    return render(request, 'shop_page/basket.html', context={'basket': basket, 'user': user})
+=======
+>>>>>>> 47f1e26cb2e9e1210cac10c15265b233ee130d52
 
 
 #### ---- 챗봇 ---- ####
@@ -162,16 +187,20 @@ def board_detail(request, diary_id):
                   context={'diary_det': diary_det, 'comment_form': comment_form})
 
 
-def likes(request, diary_id):
+@login_required(login_url="/account/")
+def likes(request):
+    context = {}
     if request.user.is_authenticated:
-        diary = get_object_or_404(Diary, pk=diary_id)
-
-        if diary.like_user.filter(pk=request.user.pk).exists():
-            diary.like_user.remove(request.user)
-        else:
-            diary.like_user.add(request.user)
-        return board_detail(request, diary_id)
-    return redirect('main:account')
+        if request.GET['diary_id']:
+            current_diary = Diary.objects.get(id=request.GET['diary_id'])
+            if current_diary.like_user.filter(pk=request.user.pk).exists():
+                current_diary.like_user.remove(request.user)
+                context = {'current_diary': current_diary.like_user.count(), 'status': 'False'}
+            else:
+                current_diary.like_user.add(request.user)
+                context = {'current_diary': current_diary.like_user.count(), 'status': 'True'}
+            return JsonResponse(context)
+    return JsonResponse(context)
 
 
 #### ---- 고해성사 댓글 ---- ####

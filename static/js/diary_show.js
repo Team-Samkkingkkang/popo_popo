@@ -15,6 +15,8 @@ function show(a) {
     } else if (a[6] === "True") {
         $(".modal_share").html(`<button class="send_btn" onclick="share_status('False')" type="button">공유 중지</button>`);
     }
+
+    $(".modal_close").html('X');
 }
 
 const body = document.querySelector('body');

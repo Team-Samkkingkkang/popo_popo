@@ -23,9 +23,10 @@ urlpatterns = [
     # 포포샵
     path('shop/', views.shop, name="shop"),
     path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
-    path('basket/<int:user_id>/', views.basket, name="basket"),
     path('basket_dayeon/', TemplateView.as_view(template_name='shop_page/basket.html'), name="basket_dayeon"),
     path('basket_dayeon2/', TemplateView.as_view(template_name='shop_page/order_complete.html'), name="basket_dayeon2"),
+    path('basket/<int:product_id>/', views.basket, name="basket"),
+    path('payment_siu/', TemplateView.as_view(template_name='shop_page/order_pyment.html'), name="payment_siu"),
 
     # 챗봇
     path('chatbot/', views.chatbot, name="chatbot"),
@@ -40,9 +41,10 @@ urlpatterns = [
     # 게시판
     path('board/', views.board, name="board"),
     path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
-    path('<int:diary_id>/likes/', views.likes, name='likes'),
+    #path('<int:diary_id>/likes/', views.likes, name='board_likes'),
     path('mypage/<int:user_id>/', views.mypage, name="mypage"),
     path('uploadProfile/', views.uploadProfile, name="uploadProfile"),
+    path('board/likes', views.likes, name="likes"),
 
     # 댓글
     # path('comment/<int:diary_id>', views.comment, name='comment'),
