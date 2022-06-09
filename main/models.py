@@ -72,7 +72,7 @@ class Diary(models.Model):
     diary_img = models.ImageField(upload_to='diary_img/', null=True, blank=True, default='default_img/paper.jpg')
     diary_share_state = models.BooleanField(default=False)
     diary_share_date = models.DateTimeField(auto_now_add=True)
-    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_diary')
+    like_user = models.ManyToManyField(settings.base.AUTH_USER_MODEL, related_name='like_diary')
 
 
 class Board(models.Model):
