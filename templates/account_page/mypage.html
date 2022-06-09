@@ -2,65 +2,76 @@
 
 {% block content %}
 
-    <div class="profile">
-        <div class="profile_header">
-            <div class="profile_header_img">
-                <img src="{{ user.user_image.user_profile.url }}">
-                <form action="{% url 'main:uploadProfile' %}" method="post" enctype="multipart/form-data"
-                      name="img_upload">
-                    {% csrf_token %}
-                    <div class="profile_header_img_btn1">
-                        <label class="profile_img_label" for="profile_update_file">이미지 선택</label>
-                        <input type="file" id="profile_update_file" name="user_profile" alt="user_profile"
-                               accept=".jpg,.jpeg,.png" style="display: none">
-                    </div>
-                    <div class="profile_header_img_btn2">
-                        <input type="submit" value="이미지 저장">
-                    </div>
-                </form>
-            </div>
-            <div class="profile_header_names">
-                <div class="username">{{ user.username }}</div>
-                <div class="nickname">{{ user.user_nickname }}</div>
-                <div class="date">
-                    <div class="regi_date_title">가입 날짜</div>
-                    <div class="regi_date">{{ user.user_regi_date.year }}년 {{ user.user_regi_date.month }}월 {{ user.user_regi_date.day }}일</div>
+<div class="profile">
+    <div class="profile_header">
+        <div class="profile_header_img">
+            <img src="{{ user.user_image.user_profile.url }}">
+            <form action="{% url 'main:uploadProfile' %}" method="post" enctype="multipart/form-data"
+                  name="img_upload">
+                {% csrf_token %}
+                <div class="profile_header_img_btn1">
+                    <label class="profile_img_label" for="profile_update_file">이미지 선택</label>
+                    <input type="file" id="profile_update_file" name="user_profile" alt="user_profile"
+                           accept=".jpg,.jpeg,.png" style="display: none">
                 </div>
-            </div>
+                <div class="profile_header_img_btn2">
+                    <input type="submit" value="이미지 저장">
+                </div>
+            </form>
         </div>
-        <div class="profile_body">
-            <div class="qna">
-                <div class="qna_title">
-                    <h2>QnA</h2>
-                    <div class="qna_content">
-                        <p>QnA 게시판에 작성한 질문 및 답변을 확인할 수 있습니다.</p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="social_info">
-                <div class="social_info_title">
-                    <h2>소셜 정보</h2>
-                    <div class="social_info_content">
-                        <p>게시판 및 다이어리에서 보여지는 프로필에 공개되는 소셜 정보입니다.</p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="withdrawal">
-                <div class="withdrawal_title">
-                    <h2>회원 탈퇴</h2>
-                    <div class="withdrawal_content">
-                        <p>탈퇴 시 작성하신 포스트 및 댓글, 다이어리가 모두 삭제되며 복구되지 않습니다.</p>
-                        <hr>
-                    </div>
+        <div class="profile_header_names">
+            <div class="username">{{ user.username }}</div>
+            <div class="nickname">{{ user.user_nickname }}</div>
+            <div class="date">
+                <div class="regi_date_title">가입 날짜</div>
+                <div class="regi_date">{{ user.user_regi_date.year }}년 {{ user.user_regi_date.month }}월 {{
+                    user.user_regi_date.day }}일
                 </div>
             </div>
         </div>
     </div>
+    <div class="profile_body">
+        <div class="qna">
+            <div class="qna_title_1">
+                <h2>QnA</h2>
+                <div class="qna_content_1">
+                    <p>QnA 게시판에 작성한 질문 및 답변을 확인할 수 있습니다.</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="social_info">
+            <div class="social_info_title">
+                <h2>소셜 정보</h2>
+                <div class="social_info_content">
+                    <p>게시판 및 다이어리에서 보여지는 프로필에 공개되는 소셜 정보입니다.</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="withdrawal">
+            <div class="withdrawal_title">
+                <h2>회원 탈퇴</h2>
+                <div class="withdrawal_content">
+                    <p>탈퇴 시 작성하신 포스트 및 댓글, 다이어리가 모두 삭제되며 복구되지 않습니다.</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="order_history">
+            <div class="order_history_title">
+                <h2>주문 내역</h2>
+                <div class="order_history_content">
+                    <p>POPO - SHOP 주문 내역을 확인할 수 있습니다.</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {{ user.user_profile }} <br>
-    {{ user.user_profile.url }} <br>
-    {{ user.user_profile.path }}
+{{ user.user_profile }} <br>
+{{ user.user_profile.url }} <br>
+{{ user.user_profile.path }}
 
 {% endblock %}

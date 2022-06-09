@@ -23,7 +23,8 @@ urlpatterns = [
     # 포포샵
     path('shop/', views.shop, name="shop"),
     path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
-    path('payment_siu/', TemplateView.as_view(template_name='shop_page/order_pyment.html'), name="payment_siu"),
+    path('payment/', views.payment, name="payment"),
+    path('order_complete/<int:order_id>/', views.order_complete, name="order_complete"),
 
     # 챗봇
     path('chatbot/', views.chatbot, name="chatbot"),
@@ -32,13 +33,16 @@ urlpatterns = [
     path('account/', views.account, name="account"),
     path('account/signup/', views.signup, name="signup"),
     path('account/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('account_dayeon3/', TemplateView.as_view(template_name='account_page/order_history.html'),
+         name="account_dayeon3"),
 
     # 게시판
     path('board/', views.board, name="board"),
     path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
-    path('<int:diary_id>/likes/', views.likes, name='likes'),
+    # path('<int:diary_id>/likes/', views.likes, name='board_likes'),
     path('mypage/<int:user_id>/', views.mypage, name="mypage"),
     path('uploadProfile/', views.uploadProfile, name="uploadProfile"),
+    path('board/likes', views.likes, name="likes"),
 
     # 댓글
     # path('comment/<int:diary_id>', views.comment, name='comment'),

@@ -5,95 +5,76 @@
 
 
     <h1 class="poposhop">POPO SHOP</h1>
-    <hr style="width:1230px; height: 0.3px;">
-
+    <hr style="width:1230px; height: 0.3px; background-color: #C9C8C8; border: 0.2px solid #C9C8C8;">
     <div class="product_detail">
         <div class="product_detail_body">
-            {% for productoption in productoption %}
-                <div class="product_detail_body_img">
-                    {% load static %}
-                    <img src="{{ productoption.product.product_img.url }}">
+            <div class="product_detail_body_img">
+                {% load static %}
+                <img src="{{ product.product_img.url }}">
+            </div>
+            <div class="product_detail_body_content">
+                <div class="product_detail_body_content_name">
+                    {{ product.product_name }}
                 </div>
-                <div class="product_detail_body_content">
-                    <div class="product_detail_body_content_name">
-                        {{ productoption.product.product_name }}
+                <div class="product_detail_body_content_price">
+                    {% load humanize %}
+                    {{ price | intcomma }}원
+                </div>
+                <div class="product_detail_body_content_deliver_info">
+                    <div class="product_detail_body_content_deliver_info_title">배송정보</div>
+                    <div class="product_detail_body_content_deliver_info_content">일반배송 | 2,500원 (20,000원 이상 무료배송)
                     </div>
-                    <div class="product_detail_body_content_price">
-                        {% load humanize %}
-                        {{ productoption.option_price | intcomma }}원
-                    </div>
+                </div>
+                <hr style="background-color: #C9C8C8; border: 0.2px solid #C9C8C8;">
 
-                    <div class="product_detail_body_content_deliver_info">
-                        <div class="product_detail_body_content_deliver_info_title">배송정보</div>
-                        <div class="product_detail_body_content_deliver_info_content">일반배송 | 2,500원 (20,000원 이상 무료배송)
-                        </div>
-                    </div>
-                    <hr>
-                    <form name="form" method="get">
-                        <div class="product_detail_body_content_count">
-                            <div class="product_detail_body_content_count_content">
-                                <p>구매수량</p>
-                            </div>
-                            <div class="product_detail_body_content_count_btn">
-                                <input type=hidden name="sell_price" value="{{ productoption.option_price }}">
-                                <input type="button" value=" - " onclick="del();">
-                                <input type="text" name="amount" value="1" size="3" onchange="change();">
-                                <input type="button" value=" + " onclick="add();">
-                                <br>
-                            </div>
-                        </div>
-                        <div class="total_price">
-                            <span class="total_price_sum">상품금액 합계 :</span>
-                            <span><input type="text" name="sum" size="3" readonly class="sum_price"></span>
-                            <span class="total_price_sum">원</span>
-                        </div>
-                    </form>
-                    <hr>
-                    <div class="last_btn">
-                            <span class="last_btn_1">
-                                장바구니
-                            </span>
-                        <span class="last_btn_2">
-                                바로구매
-                            </span>
-                    </div>
+                <!-- 옵션 목록 -->
+                <div class="product_detail_body_content_select">
+                    <a href="#" onclick="creatDiv()" class="product_detail_body_content_select_btn">
+                        <p>상품을 선택해주세요</p>
+                        <p class="arrow">▾</p>
+                    </a>
+                    <ul class="product_detail_body_content_select_list">
+                        {% for product_option in product_option %}
+                            <li class="list_type">
+                                <a class="list_type_a" href="#"
+                                   onclick="show_option([`{{ product_option.option_name }}`, `{{ product_option.option_price }}`, `{{ product_option.id }}`])">
+                                    <div class="list_type_a_name">
+                                        {{ product_option.option_name }}
+                                    </div>
+                                    <div class="list_type_a_price">
+                                        {% load humanize %}
+                                        {{ product_option.option_price | intcomma }}원
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-            {% endfor %}
+                <div class="temp"></div>
+                <div class="total_sum">0원</div>
+                <hr style="background-color: var(--price-color); border: 0.2px solid var(--price-color);">
+
+                <div class="last_btn">
+                    <span class="last_btn_1">
+                        <a href="#" onclick="chk_form('basket_click')">장바구니</a>
+                    </span>
+                    <span class="last_btn_2">
+                        <a href="#" onclick="chk_form('buy_click')">바로구매</a>
+                    </span>
+                    <div class="happyhappy"></div>
+                </div>
+            </div>
         </div>
     </div>
+    <form method="post" id="basket_click">
+        {% csrf_token %}
+        <div class="basket_selected"></div>
+    </form>
+    <form method="post" id="buy_click">
+        {% csrf_token %}
+        <div class="buy_selected"></div>
+    </form>
 
-    <body onload="init();">
-    <script>
-
-        let sell_price = document.form.sell_price.value;
-        let amount = document.form.amount.value;
-        change();
-
-        function add() {
-            hm = document.form.amount;
-            sum = document.form.sum;
-            hm.value++;
-            sum.value = parseInt(hm.value) * sell_price;
-        }
-
-        function del() {
-            hm = document.form.amount;
-            sum = document.form.sum;
-            if (hm.value > 1) {
-                hm.value--;
-                sum.value = parseInt(hm.value) * sell_price;
-            }
-        }
-
-        function change() {
-            hm = document.form.amount;
-            sum = document.form.sum;
-
-            if (hm.value < 0) {
-                hm.value = 0;
-            }
-            sum.value = parseInt(hm.value) * sell_price;
-        }
-    </script>
+    <script src="{% static 'js/shop_detail.js' %}"></script>
 
 {% endblock %}

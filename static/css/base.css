@@ -19,11 +19,12 @@ header {
 }
 
 .login {
+    width: 1000px;
+    align-items: center;
     display: flex;
     justify-content: flex-end;
     padding-top: 10px;
     /*padding-right: 330px;*/
-
 }
 
 .login > ul {
@@ -46,6 +47,8 @@ header {
 }
 
 .header_list {
+    width: 1000px;
+    margin: 0px auto;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -178,3 +181,4 @@ header {
     justify-content: space-between;
     height: 7rem;
 }
+

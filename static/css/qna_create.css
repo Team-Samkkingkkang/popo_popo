@@ -5,8 +5,6 @@
     height: 61px;
     left: 0px;
     top: 116px;
-    /*background: #F0ECEC;*/
-    /*border: 1px solid rgba(218, 218, 218, 0.6);*/
 
     font-weight: bold;
     font-size: 26px;
@@ -20,7 +18,7 @@
     margin-bottom: 30px;
 }
 
-table {
+.qna_table_body {
     border-collapse: separate;
     border-spacing: 30px 30px;
 }

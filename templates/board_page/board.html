@@ -6,9 +6,9 @@
 
     <!-- 모달창 -->
     <div class="board_modal">
-        <div class="board_modal_body">
-            <div class="board_temp"></div>
-        </div>
+        <a href="" class="board_modal_close"></a>
+        <div class="board_modal_body"></div>
+        <div class="hello"></div>
     </div>
 
     <!-- 감정 선택 -->
@@ -34,22 +34,34 @@
         </button>
     </div>
 
+    <!-- 게시글 시작 -->
     <div class="board_body">
         {% for diary in diarys %}
             <div class="board_body_body">
         <span class="board_body_body_left">
-            <div class="board_body_body_head">
-            <img style="width: 80px; height: 80px" src="{% static 'image/popo_orange.png' %}">
+            <div class="board_body_body_left_detail">
+                <div class="board_body_body_head">
+            <img style="width: 80px; height: 80px; object-fit: cover;" src="{% static 'image/popo_orange.png' %}">
             <span class="board_nick"> 다연짜응 {{ diary.diary_date }}</span>
             </div>
             <div class="board_body_content">
-                {{ diary.diary_content }}
+                {{ diary.diary_content|truncatechars:100 }}
+            </div>
             </div>
         </span>
                 <span class='board_body_img'>
-            <a href="#" class="image_click" onclick="show([`{{ diary.diary_img.url }}`])"><img style="width: 200px; height: 200px"
-                                                 src="{{ diary.diary_img.url }}"></a>
+            <a href="#" class="image_click"
+               onclick="show([
+                       `{{ diary.diary_img.url }}`,
+                       `{{ diary.user.user_image.user_profile.url }}`,
+                       `{{ diary.user.user_nickname }}`,
+                       `{{ diary.diary_share_date }}`,
+                       `{{ diary.diary_content }}`
+                       ])">
+                <img style="width: 200px; height: 200px; object-fit: cover" src="{{ diary.diary_img.url }}"></a>
+                    <button onclick="like_button({{ diary.id }})" type="button" class="btn-primary">버튼!</button>
         </span>
+
             </div>
         {% endfor %}
     </div>
