@@ -9,7 +9,7 @@ from . import models
 # Create your views here.
 
 
-from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, Basket
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order
 from main.forms import CommentForm
 
 
@@ -127,13 +127,10 @@ def basket(request, product_id):
     return render(request, 'shop_page/basket.html', context={'product': product, 'product_option': product_option})
 
 
-<<<<<<< HEAD
+
 def basket(request, user_id):
     user = User.objects.all()
-    basket = Basket.objects.filter(pk=user_id)
-    return render(request, 'shop_page/basket.html', context={'basket': basket, 'user': user})
-=======
->>>>>>> 47f1e26cb2e9e1210cac10c15265b233ee130d52
+    return render(request, 'shop_page/basket.html')
 
 
 #### ---- 챗봇 ---- ####
