@@ -172,16 +172,20 @@ def board_detail(request, diary_id):
                   context={'diary_det': diary_det, 'comment_form': comment_form})
 
 
-def likes(request, diary_id):
+@login_required(login_url="/account/")
+def likes(request):
+    context = {}
     if request.user.is_authenticated:
-        diary = get_object_or_404(Diary, pk=diary_id)
-
-        if diary.like_user.filter(pk=request.user.pk).exists():
-            diary.like_user.remove(request.user)
-        else:
-            diary.like_user.add(request.user)
-        return board_detail(request, diary_id)
-    return redirect('main:account')
+        if request.GET['diary_id']:
+            current_diary = Diary.objects.get(id=request.GET['diary_id'])
+            if current_diary.like_user.filter(pk=request.user.pk).exists():
+                current_diary.like_user.remove(request.user)
+                context = {'current_diary': current_diary.like_user.count(), 'status': 'False'}
+            else:
+                current_diary.like_user.add(request.user)
+                context = {'current_diary': current_diary.like_user.count(), 'status': 'True'}
+            return JsonResponse(context)
+    return JsonResponse(context)
 
 
 #### ---- 고해성사 댓글 ---- ####

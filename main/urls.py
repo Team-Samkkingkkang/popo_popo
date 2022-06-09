@@ -38,9 +38,10 @@ urlpatterns = [
     # 게시판
     path('board/', views.board, name="board"),
     path('board_detail/<int:diary_id>/', views.board_detail, name="board_detail"),
-    path('<int:diary_id>/likes/', views.likes, name='likes'),
+    #path('<int:diary_id>/likes/', views.likes, name='board_likes'),
     path('mypage/<int:user_id>/', views.mypage, name="mypage"),
     path('uploadProfile/', views.uploadProfile, name="uploadProfile"),
+    path('board/likes', views.likes, name="likes"),
 
     # 댓글
     # path('comment/<int:diary_id>', views.comment, name='comment'),
