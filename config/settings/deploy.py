@@ -12,7 +12,7 @@ django_heroku.settings(locals())
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd30il9ibgijs4l',
         'USER': 'irxukxprszsmwj',
         'PASSWORD': 'bfb2fde7829666175e47e3c387287b6d58329375391dbf7be8cc599a3e01c572',
