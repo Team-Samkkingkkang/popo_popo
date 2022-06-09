@@ -1,0 +1,191 @@
+.bas_title {
+    width: 1250px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
+    padding-top: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.bas_line {
+    width: 1230px;
+    border: 2px solid #EEDFDF;
+}
+
+.bas_sub_title {
+    width: 1250px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
+    padding-top: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.bas_table {
+    width: 1250px;
+    margin: 20px auto 10px auto;
+
+}
+
+table.bas_table_type {
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    margin: 20px 10px;
+
+    border-right: hidden;
+    border-left: hidden;
+
+}
+
+table.bas_table_type thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #FCFBFB;
+}
+
+table.bas_table_type thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+}
+
+table.bas_table_type tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
+}
+
+table.bas_table_type td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.bas_btn_box {
+    display: flex;
+    justify-content: left;
+}
+
+.bas_btn {
+    box-sizing: border-box;
+    width: 120px;
+    height: 50px;
+    background: #F8F3F3;
+    border-radius: 10px;
+    border: none;
+
+    margin-right: 200px;
+    margin-bottom: 100px;
+    margin-top: 10px;
+}
+
+.bas_select_del {
+    display: flex;
+    justify-content: center;
+
+
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.bas_select_sum {
+    padding-left: 400px;
+}
+
+.total_price_info {
+    /*margin: 60px 0 0;*/
+    border-top: 2px solid #EEDFDF;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 100px;
+    /*text-align: center;*/
+}
+
+.detail_price {
+    display: flex;
+    justify-content: left;
+}
+
+.total_price_info .detail_price > p > span {
+    display: block;
+    color: #222;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.total_price_info .detail_price > p:first-child {
+    border-left: 1px solid #efefef;
+}
+
+.total_price_info .detail_price > p {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    width: 420px;
+    height: 110px;
+    padding: 30px 0 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    border-right: 1px solid #efefef;
+}
+.total_price_info .detail_price>p .tx_num {
+    font-size: 24px;
+    margin-right: 2px;
+    vertical-align: -2px;
+}
+.tx_num {
+    letter-spacing: -.02em!important;
+    font-weight: 500;
+}
+.sum_price {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 100px;
+    margin-top: -50px;
+}
+.total_price_info .sum_price .tx_price {
+    color: #ff2828;
+    font-size: 16px;
+}
+.tx_price {
+    margin-top: -10px;
+}
+
+.bas_btn_box2 {
+    display: flex;
+    justify-content: center;
+}
+
+.bas_btn2 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 60px;
+    background: #F8F3F3;
+    border-radius: 10px;
+    border: none;
+
+    margin-right: 50px;
+    margin-bottom: 100px;
+    margin-top: 10px;
+}
+
+.bas_select_order {
+    display: flex;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 29px;
+    text-align: center;
+}

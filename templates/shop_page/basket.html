@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='bas_whole'>
+
+    <div class='bas_head'>
+        <h1 class="bas_title"> 장바구니 </h1>
+        <!--    <hr class = 'bas_title_line' >-->
+        <hr class='bas_line'>
+    </div>
+
+    <div class='bas_body'>
+        <h3 class='bas_sub_title'>Friend POPO 배송상품</h3>
+        <div class='bas_table'>
+            <div>
+                <table class='bas_table_type'>
+                    <thead>
+                    <tr>
+                        <th scope="cols">
+                            상품정보
+                        </th>
+                        <th scope="cols">판매가</th>
+                        <th scope="cols">수량</th>
+                        <th scope="cols">구매가</th>
+                        <th scope="cols">배송정보</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>죽여주는 로션</td>
+                        <td>죽여주는 가격</td>
+                        <td>죽여주는 수량</td>
+                        <td>죽여주는 구매가</td>
+                        <td>죽여주는 배송정보</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='bas_btn_box'>
+                <button class='bas_btn'>
+                    <a class='bas_select_del'>선택상품 삭제</a>
+                </button>
+                <p class='bas_select_sum'> 총 판매가 12,000원 - 총 할인금액 5,100원 + 배송비 2,500원 = 9,400원</p>
+            </div>
+            <div class='total_price_info'>
+                <div class='detail_price'>
+                    <p>
+                        총 판매가
+                        <span>
+                        <span class='tx_num'> 50,000 </span>
+                         원
+                    </span>
+                    </p>
+                    <p class="tx_sale">
+                        총 할인 금액
+                        <span>
+                            <span class="tx_num">25,000</span>
+                            원
+                        </span>
+                    </p>
+                    <p>
+                        배송비
+                        <span>
+                            <span class="tx_num">0</span>
+                            원
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class='sum_price'>
+                <a class='tx_sum'>총 결제 예상금액</a>
+                <span class="tx_price">
+                        <span class="tx_num">25,000</span>
+                        원
+                    </span>
+            </div>
+        </div>
+        <div class='bas_btn_box2'>
+            <button class='bas_btn2'>
+                <a class='bas_select_order'>주문하기</a>
+            </button>
+        </div>
+    </div>
+</div>
+
+    {% endblock %}

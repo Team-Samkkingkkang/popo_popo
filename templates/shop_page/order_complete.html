@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='order_complete_whole'>
+    <div class='order_complete_head'>
+        <h1 class="order_complete_title"> 주문완료 </h1>
+        <hr class='order_complete_line'>
+    </div>
+
+    <div class='order_complete_body'>
+        <div class='order_complete_body'>
+            <p class='order_complete_username'> 시우 고객님 </p>
+            <p class='order_complete_tx'> 주문이 성공적으로 완료되었습니다 ! </p>
+            <p class='order_complete_num'> 주문번호 : 031406080728 </p>
+        </div>
+        <div class='order_complete_btn_box'>
+            <button class='order_complete_btn'>
+                <a class='order_complete_cs'>고객센터</a>
+            </button>
+            <button class='order_complete_btn2'>
+                <a class='order_complete_mp'>마이페이지</a>
+            </button>
+        </div>
+        <hr class="order_complete_under_line">
+    </div>
+    <h3 class='order_complete_sub_title'>배송상품</h3>
+    <div class="chong2_table_box">
+        <div class="chong2_table">
+            <table class="table_mrrr2">
+                <tr class="table_hrrr2">
+                    <th style="width: 35rem;">상품정보</th>
+                    <th style="width: 10.5rem;">판매가</th>
+                    <th style="width: 9rem;">수량</th>
+                    <th style="width: 10.5rem;">구매가</th>
+                    <th style="width: 12rem;">배송정보</th>
+                </tr>
+                <tr class="table_rrrr2">
+                    <td class="proinfo2" style="width: 35rem; border-right: 1px solid #ccc; text-align: left;">
+                        <div style="width: 5rem; height: 5rem; border: 1px solid #783030; margin-left: 3rem;"></div>
+                        <div>
+                            <p style="margin-left: 3rem;">Papier d'armeni Paper Incense</p>
+                            <p style="margin-left: 3rem;">옵션 : 로즈우드 향</p>
+                        </div>
+                    </td>
+                    <td style="width: 10.5rem; border-right: 1px solid #ccc;">12,000원</td>
+                    <td style="width: 9rem; border-right: 1px solid #ccc;">1</td>
+                    <td style="width: 10.5rem; border-right: 1px solid #ccc;">6,900원</td>
+                    <td style="width: 12rem;">배송비 2,500원</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

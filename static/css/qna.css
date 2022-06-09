@@ -1,16 +1,23 @@
 .qna_title {
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: left;*/
 
-    margin-top: 80px;
-    margin-bottom: 30px;
+    /*margin-top: 80px;*/
+    /*margin-bottom: 30px;*/
 
 
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 44px;
-    line-height: 52px;
+    /*font-family: 'Roboto';*/
+    /*font-style: normal;*/
+    /*font-weight: 700;*/
+    /*font-size: 44px;*/
+    /*line-height: 52px;*/
+    width: 1500px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
+    padding-top: 30px;
+    padding-bottom: 15px;
+    /*padding-left: 0px;*/
 }
 
 .search_bar {
