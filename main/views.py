@@ -1,15 +1,19 @@
+import json
+
+from django.db.models import Sum, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from . import models
 # Create your views here.
 
 
-from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, OrderCount
 from main.forms import CommentForm
 
 
@@ -116,21 +120,101 @@ def shop_detail(request, product_id):
     for i in product_option:
         if i.option_price < price:
             price = i.option_price
+    if request.POST:
+        if 'basket_selected' in request.POST:
+            basket_selected = eval(request.POST['basket_selected'])
+
+            for i in basket_selected:
+                if OrderCount.objects.filter(user=request.user, product_option=ProductOption.objects.get(pk=i)):
+                    temp = OrderCount.objects.filter(user=request.user, product_option=ProductOption.objects.get(pk=i))
+                    temp.update(order_count_count=basket_selected[i],
+                                order_count_price=ProductOption.objects.get(pk=i).option_price * basket_selected[i])
+                else:
+                    order_count = OrderCount()
+                    order_count.user = request.user
+                    order_count.product_option = ProductOption.objects.get(pk=i)
+                    order_count.order_count_count = basket_selected[i]
+                    order_count.order_count_price = ProductOption.objects.get(pk=i).option_price * basket_selected[i]
+                    order_count.save()
+
+            products = OrderCount.objects.filter(user=request.user, order_id__isnull=True)
+            price = OrderCount.objects.filter(user=request.user).aggregate(Sum('order_count_price'))[
+                'order_count_price__sum']
+            total_price = price + 2500
+            return render(request, 'shop_page/basket.html',
+                          context={'products': products, 'price': price, 'total_price': total_price})
+
+    if request.POST:
+        if 'buy_selected' in request.POST:
+            buy_selected = eval(request.POST['buy_selected'])
+
+            for i in buy_selected:
+                if OrderCount.objects.filter(user=request.user, product_option=ProductOption.objects.get(pk=i), order_id__isnull=True):
+                    temp = OrderCount.objects.filter(user=request.user, product_option=ProductOption.objects.get(pk=i))
+                    temp.update(order_count_count=buy_selected[i],
+                                order_count_price=ProductOption.objects.get(pk=i).option_price * buy_selected[i])
+                else:
+                    order_count = OrderCount()
+                    order_count.user = request.user
+                    order_count.product_option = ProductOption.objects.get(pk=i)
+                    order_count.order_count_count = buy_selected[i]
+                    order_count.order_count_price = ProductOption.objects.get(pk=i).option_price * buy_selected[i]
+                    order_count.save()
+            return payment(request)
 
     return render(request, 'shop_page/shop_detail.html',
                   context={'product': product, 'product_option': product_option, 'price': price})
 
+@login_required(login_url="/account/")
+def payment(request):
+    products = OrderCount.objects.filter(user=request.user, order_id__isnull=True)
+    price = OrderCount.objects.filter(user=request.user, order_id__isnull=True).aggregate(Sum('order_count_price'))[
+        'order_count_price__sum']
+    total_price = price
+    order_num = Order.objects.all().aggregate(Max('id'))['id__max']+1
+    print(order_num)
 
-def basket(request, product_id):
-    product = Product.objects.get(pk=product_id)
-    product_option = ProductOption.objects.filter(product=product)
-    return render(request, 'shop_page/basket.html', context={'product': product, 'product_option': product_option})
+    if request.POST:
+        if 'order_user_name' in request.POST:
+            print('여기')
+            order_user_name = request.POST['order_user_name']
+            order_user_phone_num = request.POST['order_user_phone_num_1'] + '-' + request.POST[
+                'order_user_phone_num_2'] + '-' + request.POST['order_user_phone_num_3']
+            order_address_num = request.POST['order_address_num']
+            order_address = request.POST['order_address_1'] + ' ' + request.POST['order_address_2']
+            order_request = request.POST['tec']
+            order_price = total_price + 2500
+
+            order = Order()
+            order.user = request.user
+            order.order_username = order_user_name
+            order.order_user_phone_num = order_user_phone_num
+            order.order_address_num = order_address_num
+            order.order_address = order_address
+            order.order_request = order_request
+            order.order_price = order_price
+            order.save()
+            print(order_price)
+
+            OrderCount.objects.filter(user=request.user, order_id__isnull=True).update(order_id=order_num)
+            print(order_user_name, order_user_phone_num, order_address_num, order_address, order_request, order_price)
+            return order_complete(request, order_num)
+    return render(request, 'shop_page/order_payment.html',
+                  context={'products': products, 'price': price, 'total_price': total_price, 'order_num': order_num})
 
 
+def basket_detail(request, context):
+    return render(request, 'shop_page/basket.html', context)
 
-def basket(request, user_id):
-    user = User.objects.all()
-    return render(request, 'shop_page/basket.html')
+
+def order_complete(request, order_id):
+    order_id = order_id
+    order = Order.objects.get(id=order_id)
+    print(order)
+    orders = OrderCount.objects.filter(order_id=order_id)
+    print(orders)
+    return render(request, 'shop_page/order_complete.html',
+                  context={'order_id': order_id, 'orders': orders, 'order': order})
 
 
 #### ---- 챗봇 ---- ####
