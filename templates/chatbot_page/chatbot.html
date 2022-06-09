@@ -10,7 +10,7 @@
 {% load static %}
 
 <div class="chat">
-    <div class="chatbox">
+    <div class="chatbox" id="chatchat">
         <div class="chatQ"></div>
     </div>
     <div class="chatfooter">
@@ -26,7 +26,6 @@
 </div>
 
 <script>
-
     let addtext = "";
     let bottext = "";
 
@@ -43,7 +42,11 @@
         addtext += "<div style='margin: 3rem 5rem; text-align: left;'>" +
             "<span style='background-color: #FFFAFA; padding: 10px 15px; border-radius: 10px; font-size: 20px;'>" + "나는 포포다" + "</span></div>"
         $(".chatQ").html(addtext);
+
+        $('#chatchat').scrollTop($('#chatchat')[0].scrollHeight);
+
     }
+
 
 
 </script>
