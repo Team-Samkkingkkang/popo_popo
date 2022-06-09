@@ -56,81 +56,25 @@
 
                 <div class="last_btn">
                     <span class="last_btn_1">
-                        <a href="{% url 'main:basket' product.id %}">장바구니</a>
+                        <a href="#" onclick="chk_form('basket_click')">장바구니</a>
                     </span>
                     <span class="last_btn_2">
-                        <a>바로구매</a>
+                        <a href="#" onclick="chk_form('buy_click')">바로구매</a>
                     </span>
+                    <div class="happyhappy"></div>
                 </div>
             </div>
         </div>
     </div>
+    <form method="post" id="basket_click">
+        {% csrf_token %}
+        <div class="basket_selected"></div>
+    </form>
+    <form method="post" id="buy_click">
+        {% csrf_token %}
+        <div class="buy_selected"></div>
+    </form>
 
-    <script>
-        // 변수 선언 부분
-        let option_list = '';
-        let option_selected = {};
-        let option_price = {};
-        let total_sum = 0;
-
-        // 옵션 선택 버튼 (보이기 - 안보이기)
-        $(document).on("click", ".product_detail_body_content_select_btn", function () {
-            if ($(this).next().css("display") === "none") {
-                $(this).next().show();
-            } else {
-                $(this).next().hide();
-            }
-        });
-
-        // 옵션 선택시 옵션 보이기 기능
-        function show_option(a) {
-
-            if (!option_selected[a[2]]) {
-                option_selected[a[2]] = 1;
-            }
-
-            if (!option_price[a[2]]) {
-                option_price[a[2]] = a[1];
-            }
-            console.log(option_selected)
-            sum();
-            option_list += '<div class="price_plus">' + '<div class="price_plus_product_name">' + a[0]
-                + '<div class="option_select_price">'+ a[1] + '원' + '</div>' + '</div>'
-                + '<div class="price_plus_nums">'
-                + '<button onclick="del(' + a[2] + ')" class="btn_minus">-</button>'
-                + '<div class="price_plus_product_price" id="count'+a[2]+'">' + option_selected[a[2]] + '</div>'
-                + '<button onclick="add(' + a[2] + ')" class="btn_plus">+</button>' + '</div>' + '</div>'
-
-            $('.temp').html(option_list);
-
-        }
-
-        function add(a) {
-            option_selected[a] += 1
-            console.log(option_selected)
-            $(`#count`+a).html(option_selected[a])
-            sum();
-        }
-
-        function del(a) {
-            if (option_selected[a] > 1) {
-                option_selected[a] -= 1
-            }
-            console.log(option_selected)
-            $(`#count`+a).html(option_selected[a])
-            sum();
-        }
-
-        function sum() {
-            let total_sum = 0;
-            for (var i in option_selected) {
-                total_sum += option_selected[i] * option_price[i]
-            }
-            console.log(option_selected)
-            console.log(total_sum)
-            $('.total_sum').html(total_sum+'원');
-        }
-
-    </script>
+    <script src="{% static 'js/shop_detail.js' %}"></script>
 
 {% endblock %}

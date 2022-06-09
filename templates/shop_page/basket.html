@@ -4,8 +4,7 @@
 <div class='bas_whole'>
 
     <div class='bas_head'>
-        <h1 class="bas_title"> 장바구니 </h1>
-        <!--    <hr class = 'bas_title_line' >-->
+        <h1 class="bas_title"> 장바구니</h1>
         <hr class='bas_line'>
     </div>
 
@@ -19,20 +18,23 @@
                         <th scope="cols">
                             상품정보
                         </th>
-                        <th scope="cols">판매가</th>
+                        <th scope="cols">옵션</th>
                         <th scope="cols">수량</th>
                         <th scope="cols">구매가</th>
                         <th scope="cols">배송정보</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for product in products %}
                     <tr>
-                        <td>죽여주는 로션</td>
-                        <td>죽여주는 가격</td>
-                        <td>죽여주는 수량</td>
-                        <td>죽여주는 구매가</td>
-                        <td>죽여주는 배송정보</td>
+                        <td>{{ product.product_option.product.product_name }}</td>
+                        <td>{{ product.product_option.option_name }}</td>
+                        <td>{{ product.order_count_count }}개</td>
+                        {% load humanize %}
+                        <td>{{ product.order_count_price | intcomma }}원</td>
+                        <td>2,500원</td>
                     </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -40,28 +42,28 @@
                 <button class='bas_btn'>
                     <a class='bas_select_del'>선택상품 삭제</a>
                 </button>
-                <p class='bas_select_sum'> 총 판매가 12,000원 - 총 할인금액 5,100원 + 배송비 2,500원 = 9,400원</p>
+                <p class='bas_select_sum'> 총 판매가 {{ price | intcomma }}원 + 배송비 2,500원 = {{ total_price | intcomma }}원</p>
             </div>
             <div class='total_price_info'>
                 <div class='detail_price'>
                     <p>
                         총 판매가
                         <span>
-                        <span class='tx_num'> 50,000 </span>
+                        <span class='tx_num'> {{ total_price | intcomma }}원 </span>
                          원
                     </span>
                     </p>
                     <p class="tx_sale">
                         총 할인 금액
                         <span>
-                            <span class="tx_num">25,000</span>
+                            <span class="tx_num">0</span>
                             원
                         </span>
                     </p>
                     <p>
                         배송비
                         <span>
-                            <span class="tx_num">0</span>
+                            <span class="tx_num">2500</span>
                             원
                         </span>
                     </p>
@@ -70,14 +72,14 @@
             <div class='sum_price'>
                 <a class='tx_sum'>총 결제 예상금액</a>
                 <span class="tx_price">
-                        <span class="tx_num">25,000</span>
+                        <span class="tx_num">{{ total_price | intcomma }}</span>
                         원
                     </span>
             </div>
         </div>
         <div class='bas_btn_box2'>
             <button class='bas_btn2'>
-                <a class='bas_select_order'>주문하기</a>
+                <a class='bas_select_order' href="{% url 'main:payment' %}">주문하기</a>
             </button>
         </div>
     </div>

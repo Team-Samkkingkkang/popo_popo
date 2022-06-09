@@ -24,14 +24,12 @@ class User(AbstractUser):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    order_number = models.IntegerField()
     order_price = models.IntegerField()
-    order_delivery_fee = models.IntegerField()
-    order_username = models.CharField(max_length=200)
+    order_user_name = models.CharField(max_length=200)
     order_user_phone_num = models.CharField(max_length=200)
     order_address_num = models.CharField(max_length=200)
+    order_address = models.CharField(max_length=200)
     order_request = models.TextField()
-    order_agree = models.BooleanField()
 
 
 class Product(models.Model):
@@ -39,11 +37,8 @@ class Product(models.Model):
     product_info = models.CharField(max_length=200)
     product_category = models.CharField(max_length=200)
     product_emotion = models.CharField(max_length=200)
-<<<<<<< HEAD
     product_img = models.ImageField(null=True, upload_to='product_img/')
-=======
-    product_img = models.ImageField(null=True, upload_to='profile_img/')
->>>>>>> 47f1e26cb2e9e1210cac10c15265b233ee130d52
+
 
 
 class Qna(models.Model):
@@ -63,7 +58,8 @@ class ProductOption(models.Model):
 
 
 class OrderCount(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE)
     order_count_count = models.IntegerField()
     order_count_price = models.IntegerField()
