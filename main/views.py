@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from . import models
 # Create your views here.
 
-#### ---- 다이어리 ---- ####
 
 from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, Basket
 from main.forms import CommentForm
@@ -110,15 +109,31 @@ def shop(request):
 
 
 def shop_detail(request, product_id):
-    product = Product.objects.all()
-    productoption = ProductOption.objects.filter(pk=product_id)
-    return render(request, 'shop_page/shop_detail.html', context={'product': product, 'productoption': productoption})
+    product = Product.objects.get(pk=product_id)
+    product_option = ProductOption.objects.filter(product=product)
+
+    price = 1000000000000
+    for i in product_option:
+        if i.option_price < price:
+            price = i.option_price
+
+    return render(request, 'shop_page/shop_detail.html',
+                  context={'product': product, 'product_option': product_option, 'price': price})
 
 
+def basket(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    product_option = ProductOption.objects.filter(product=product)
+    return render(request, 'shop_page/basket.html', context={'product': product, 'product_option': product_option})
+
+
+<<<<<<< HEAD
 def basket(request, user_id):
     user = User.objects.all()
     basket = Basket.objects.filter(pk=user_id)
     return render(request, 'shop_page/basket.html', context={'basket': basket, 'user': user})
+=======
+>>>>>>> 47f1e26cb2e9e1210cac10c15265b233ee130d52
 
 
 #### ---- 챗봇 ---- ####

@@ -1,0 +1,32 @@
+.bas_whole {
+    width: 1000px;
+    margin: 40px auto 10px auto;
+    align-items: center;
+}
+
+.bas_title {
+    color: #7A6E6E;
+    padding-top: 10px;
+}
+
+.bas_line {
+    border: 1px solid #EEDFDF;
+}
+
+.bas_body {
+    margin-top: 40px;
+}
+
+.bas_table_type {
+    width: 950px;
+    margin: 5px auto;
+    align-items: center;
+}
+
+.bas_sub_title {
+    color: #585555;
+    font-weight: lighter;
+}
+
+
+
