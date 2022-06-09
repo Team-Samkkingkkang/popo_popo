@@ -59,9 +59,9 @@ header {
 .logo > a > img {
     width: auto;
     height: auto;
-    max-width: 10rem;
-    max-height: 10rem;
-    margin-right: 30rem;
+    max-width: 300px;
+    max-height: 300px;
+    padding-top: 5px;
 }
 
 .diary_button {

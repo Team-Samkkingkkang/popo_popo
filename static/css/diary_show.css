@@ -47,6 +47,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+>
 }
 
 .modal_right {
@@ -91,7 +92,3 @@
     padding: 0px 20px;
     font-size: 12px;
 }
-
-
-
-

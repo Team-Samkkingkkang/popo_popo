@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="qna_write_form">
-        <form enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            <table class="qna_table_bdoy">
+
+<h1 class='qna_update_head'> QnA 질문하기 </h1>
+<div class="qna_write_form">
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class = 'create_table'>
+            <table>
                 <div class="siu">
                     <tr>
                         <td>제목</td>
@@ -17,26 +20,26 @@
                 </tr>
                 <tr>
                     <td>첨부파일</td>
-                    <td><input type="file" name="qna_img" alt="qna_img" accept=".jpg,.jpeg,.png"></td>
+                    <td><input type="file" name="qna_img" alt="qna_img"></td>
                 </tr>
-
             </table>
-            <div class='qna_write_foot'>
-                <tr>
-                    <td>
-                        <select class='qna_select' name="qna_status">
-                            <option value="False">관리자 아님</option>
-                            <option value="True">관리자 권한</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input class='qna_write_submit' type="submit"></td>
-                </tr>
-            </div>
-        </form>
-    </div>
+        </div>
 
+        <div class='qna_write_foot'>
+            <tr>
+                <td>
+                    <select class='qna_select' name="qna_status">
+                        <option value="False">관리자 아님</option>
+                        <option value="True">관리자 권한</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class='qna_write_submit' type="submit"></td>
+            </tr>
+        </div>
+    </form>
+</div>
 
 
 {% endblock %}

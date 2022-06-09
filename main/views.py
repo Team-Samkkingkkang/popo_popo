@@ -2,11 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.utils import timezone
+
+from django.contrib.auth.decorators import login_required
+
 from . import models
 # Create your views here.
 
-#### ---- 다이어리 ---- ####
-from main.models import Diary, User, UserImage, Qna, Product, ProductOption
+
+from main.models import Diary, User, UserImage, Qna, Product, ProductOption, Order, Basket
 from main.forms import CommentForm
 
 
@@ -121,6 +124,8 @@ def basket(request, product_id):
     return render(request, 'shop_page/basket.html', context={'product': product, 'product_option': product_option})
 
 
+
+
 #### ---- 챗봇 ---- ####
 def chatbot(request):
     return render(request, 'chatbot_page/chatbot.html', context={})
@@ -221,10 +226,11 @@ def qna(request):
     return render(request, template_name='QnA_page/Qna.html', context={'qna_list': qna_list})
 
 
+@login_required(login_url="/account/")
 def qna_create(request):
     if request.method == "POST":
         qna_temp = Qna()
-        if request.FILES['qna_img']:
+        if request.FILES:
             qna_temp.qna_img = request.FILES['qna_img']
 
         if request.POST['qna_status'] == 'True':
@@ -254,8 +260,9 @@ def qna_delete(request, qna_id):
 
 def qna_update(request, qna_id):
     if request.method == "POST":
-        if request.FILES['qna_img']:
-            Qna.objects.filter(pk=qna_id).update(qna_img=request.FILES['qna_img'])
+        if request.FILES:
+            qna_img = request.FILES['qna_img']
+            Qna.objects.filter(pk=qna_id).update(qna_img=qna_img)
 
         if request.POST['qna_status'] == 'True':
             Qna.objects.filter(pk=qna_id).update(qna_status=True)

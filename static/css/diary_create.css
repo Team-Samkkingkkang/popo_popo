@@ -12,24 +12,32 @@
     outline: none;
 }
 
-.create_box_btn {
-    width: 70rem;
-    height: 20rem;
+.submit_bt {
+
     margin: 1rem 12rem;
-    text-align: right;
+    padding-top: 8px;
+    box-sizing: border-box;
+    width: 120px;
+    height: 50px;
+    background: #F8F3F3;
+    border-radius: 15px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+
+}
+
+.create_box_btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rem;
 }
 
 .pic > img {
     border-radius: 2rem;
 }
 
-
-
-
-
-
-
-
-
-
-
+.sel {
+    margin-top: 1rem;
+}

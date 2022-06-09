@@ -5,9 +5,7 @@ from main import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 app_name = 'main'
-
 
 urlpatterns = [
     # 메인 화면
@@ -26,6 +24,7 @@ urlpatterns = [
     path('shop/', views.shop, name="shop"),
     path('shop_detail/<int:product_id>/', views.shop_detail, name="shop_detail"),
     path('basket/<int:product_id>/', views.basket, name="basket"),
+    path('payment_siu/', TemplateView.as_view(template_name='shop_page/order_pyment.html'), name="payment_siu"),
 
     # 챗봇
     path('chatbot/', views.chatbot, name="chatbot"),
@@ -53,4 +52,3 @@ urlpatterns = [
     path('QnA_update/<int:qna_id>', views.qna_update, name="qna_update"),
     path('QnA_delete/<int:qna_id>', views.qna_delete, name="qna_delete"),
 ]
-
