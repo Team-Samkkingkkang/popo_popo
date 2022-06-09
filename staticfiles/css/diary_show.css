@@ -1,0 +1,102 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000rem;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+}
+
+.modal.show {
+    display: block;
+    z-index: 200;
+}
+
+.modal_body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 200;
+    width: 1000px;
+    height: 700px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.diary_img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.modal_main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal_img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+>
+}
+
+.modal_right {
+    margin-bottom: 20px;
+}
+
+.modal_content {
+    text-align: left;
+    width: 400px;
+    height: 400px;
+    margin: 10px 0px;
+    padding: 0px 20px;
+    font-size: 17px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal_content::-webkit-scrollbar {
+    display: none;
+}
+
+.modal_date {
+    text-align: right;
+    font-weight: lighter;
+    padding-top: 20px;
+    padding-right: 20px;
+    color: #707070;
+}
+
+.modal_close {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 24rem;
+    color: #e9e9e9;
+    font-size: 2rem
+}
+
+.emo {
+    width: 5rem;
+    height: 5rem;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btns > button {
+    padding: 0px 20px;
+    font-size: 12px;
+}

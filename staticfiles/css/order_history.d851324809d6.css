@@ -1,0 +1,14 @@
+.order_history_title {
+    width: 1250px;
+    margin: 50px auto 10px auto;
+    text-align: left;
+    color: var(--header-text-color);
+    padding-top: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.order_history_line {
+    width: 1230px;
+    border: 2px solid #EEDFDF;
+}
